@@ -53,3 +53,10 @@ CI 文件已准备，官方 actions 固定到本次 API 查证的 v5 commit SHA�
 - 新公开库已建立：MortyYJT/personal-website-guyuy；main 与 codex/personal-website-rebuild 从全新根提交 f64387c 初始化。GitHub API 验证作者、提交者均关联 MortyYJT。
 - 新 Vercel 项目在 mortyyjts-projects 建立，导入 main、根目录 ./、Next.js；首次部署 dpl_ASRkikoAAMkqPt9qmuB1oCHkj1bZ 成功，生产域名为 https://personal-website-guyuy.vercel.app。
 - 实际生产 origin 已写入 canonical / Open Graph / robots / sitemap；下次 Git push 将用于验证真正自动部署。初始推送未产生 Actions run，已确认 Actions enabled、CI workflow active；后续提交将核实是否触发。
+
+## 自动部署与 CI 诊断
+
+- a34d47e 与 6b45c17 的 Git push 均触发 Vercel，6b45c17 的 GitHub Vercel status 为 success，部署 3CxaKJwXdRcwsZk97t3tovmz5Hwg。
+- 线上首页、简历、项目、robots、sitemap 均 HTTP 200；未知路径 HTTP 404。canonical / Open Graph URL 均为实际生产域名，sitemap 包含三个产品路由。
+- 生产浏览器语言及 light 偏好跨页、刷新、404 保持；项目页控制台无 warning / error。页面初始 SSR 为中文，hydration 后恢复英文，验收等待偏好控件出现后核实。
+- Actions enabled、workflow active，但此前 push 未生成 run。添加 workflow_dispatch 后手动 run 37764464629 正常启动；暂不将手动执行算作 push CI 成功。当前 Git 使用系统 osxkeychain，下一次推送改用已核实 MortyYJT 的 gh credential helper，隔离凭据来源这一变量。未读取或打印任何 token。
