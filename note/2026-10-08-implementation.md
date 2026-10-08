@@ -47,3 +47,9 @@ CI 文件已准备，官方 actions 固定到本次 API 查证的 v5 commit SHA�
 ## 发布授权
 
 2026-10-08：用户明确授权新库创建、commit / push、初始化 main，以及同名 Vercel 项目的生产发布。GitHub 当前登录账户已核对为 MortyYJT；Vercel connector 需重认证，已改用当前登录的浏览器，目标团队为 mortyyjts-projects。发布验收进行中。
+
+## 首次发布与 Git CD 验收准备
+
+- 新公开库已建立：MortyYJT/personal-website-guyuy；main 与 codex/personal-website-rebuild 从全新根提交 f64387c 初始化。GitHub API 验证作者、提交者均关联 MortyYJT。
+- 新 Vercel 项目在 mortyyjts-projects 建立，导入 main、根目录 ./、Next.js；首次部署 dpl_ASRkikoAAMkqPt9qmuB1oCHkj1bZ 成功，生产域名为 https://personal-website-guyuy.vercel.app。
+- 实际生产 origin 已写入 canonical / Open Graph / robots / sitemap；下次 Git push 将用于验证真正自动部署。初始推送未产生 Actions run，已确认 Actions enabled、CI workflow active；后续提交将核实是否触发。

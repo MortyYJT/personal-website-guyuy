@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { PreferencesProvider } from "../components/preferences-provider";
+import { siteOpenGraph, siteOrigin } from "../lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteOrigin),
   title: { default: "谷鱼Y · MortyYJT", template: "%s · MortyYJT" },
   description: "谷鱼Y / MortyYJT 的个人主页，记录项目实践与持续探索。",
   authors: [{ name: "MortyYJT", url: "https://github.com/MortyYJT" }],
-  openGraph: {
-    title: "谷鱼Y · MortyYJT",
-    description: "Projects, learning, and an ongoing exploration.",
-    type: "website",
-    siteName: "MortyYJT",
-  },
+  openGraph: siteOpenGraph,
   twitter: {
     card: "summary",
     title: "谷鱼Y · MortyYJT",

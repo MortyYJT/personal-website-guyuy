@@ -10,7 +10,7 @@
 
 **Spec:** [Approved design](../specs/2026-10-08-personal-website-design.md).
 
-**Status:** Local implementation and independent review complete; publication Task 6 pending separate authorization. See the milestone note for browser testing boundaries.
+**Status:** Local implementation and independent review complete; publication Task 6 authorized and in progress. See the milestone note for browser testing boundaries.
 
 ## Global Constraints
 
@@ -136,10 +136,10 @@ Browser testing boundary: running-page denied storage was verified; a fresh deni
 
 **Interfaces:** Consumes the locally accepted application. Produces verified repository identity, CI result, deployed commit, and public production URL only after the corresponding external actions are authorized.
 
-- [ ] Present the accepted local result and exact proposed external targets: `MortyYJT/personal-website-guyuy`, matching Vercel project, development branch and initial main bootstrap. Obtain missing authorization for commit/push, repository creation, bootstrap and production release as required by session context. Continue with already-authorized actions without reasking.
-- [ ] Verify repository-local author/committer fields, run `git diff --cached --check`, and use conventional commit subjects with an English bullet body. Publish new history without altering the previous repository.
-- [ ] Create/connect the new GitHub repository, attach any created PR to this chat, and preserve user-owned merges. Verify the intended account is associated with the published commits and that the new repository is accessible.
-- [ ] Inspect the current Vercel account, available projects, old-project domain associations, and old Git disconnection. Prefer a new matching project; reuse the old project only when its actual domain association justifies it. Correct framework/root/output settings before the first deployment. Do not delete old resources.
+- [x] Present the accepted local result and exact proposed external targets: `MortyYJT/personal-website-guyuy`, matching Vercel project, development branch and initial main bootstrap. Obtain missing authorization for commit/push, repository creation, bootstrap and production release as required by session context. Continue with already-authorized actions without reasking.
+- [x] Verify repository-local author/committer fields, run `git diff --cached --check`, and use conventional commit subjects with an English bullet body. Publish new history without altering the previous repository.
+- [x] Create/connect the new GitHub repository, attach any created PR to this chat, and preserve user-owned merges. Verify the intended account is associated with the published commits and that the new repository is accessible.
+- [x] Inspect the current Vercel account, available projects, old-project domain associations, and old Git disconnection. Prefer a new matching project; reuse the old project only when its actual domain association justifies it. Correct framework/root/output settings before the first deployment. Do not delete old resources.
 - [ ] Verify remote CI on the exact published commit. Once the production branch/bootstrap is authorized and ready, verify a genuine Git-triggered production deployment from the expected commit, not merely a manual CLI upload.
 - [ ] Set the actual production origin for canonical/Open Graph/crawling metadata, publish that reviewed change within authorization, and verify the resulting automatic deployment. Use official provider tools or the authenticated browser; never retrieve or print private tokens.
 - [ ] Open the production URL and smoke-test home, resume, projects, preferences and direct routes. Record commit SHA, CI run, Vercel deployment, project, production URL, and separate status for every acceptance dimension. If publication is pending, report local readiness and remote criteria as not verified.
