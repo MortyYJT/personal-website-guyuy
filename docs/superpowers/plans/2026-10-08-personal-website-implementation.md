@@ -10,7 +10,7 @@
 
 **Spec:** [Approved design](../specs/2026-10-08-personal-website-design.md).
 
-**Status:** Local implementation and independent review complete; publication Task 6 authorized and in progress. See the milestone note for browser testing boundaries.
+**Status:** Local implementation and independent review complete; publication complete; Git-triggered CD verified; automatic push CI unresolved (manual remote CI passes). See the milestone note for browser testing boundaries.
 
 ## Global Constraints
 
@@ -141,8 +141,10 @@ Browser testing boundary: running-page denied storage was verified; a fresh deni
 - [x] Create/connect the new GitHub repository, attach any created PR to this chat, and preserve user-owned merges. Verify the intended account is associated with the published commits and that the new repository is accessible.
 - [x] Inspect the current Vercel account, available projects, old-project domain associations, and old Git disconnection. Prefer a new matching project; reuse the old project only when its actual domain association justifies it. Correct framework/root/output settings before the first deployment. Do not delete old resources.
 - [ ] Verify remote CI on the exact published commit. Once the production branch/bootstrap is authorized and ready, verify a genuine Git-triggered production deployment from the expected commit, not merely a manual CLI upload.
-- [ ] Set the actual production origin for canonical/Open Graph/crawling metadata, publish that reviewed change within authorization, and verify the resulting automatic deployment. Use official provider tools or the authenticated browser; never retrieve or print private tokens.
-- [ ] Open the production URL and smoke-test home, resume, projects, preferences and direct routes. Record commit SHA, CI run, Vercel deployment, project, production URL, and separate status for every acceptance dimension. If publication is pending, report local readiness and remote criteria as not verified.
+- [x] Set the actual production origin for canonical/Open Graph/crawling metadata, publish that reviewed change within authorization, and verify the resulting automatic deployment. Use official provider tools or the authenticated browser; never retrieve or print private tokens.
+- [x] Open the production URL and smoke-test home, resume, projects, preferences and direct routes. Record commit SHA, CI run, Vercel deployment, project, production URL, and separate status for every acceptance dimension. If publication is pending, report local readiness and remote criteria as not verified.
+
+**Remaining boundary:** Remote CI passes through `workflow_dispatch`; repeated Git pushes do not create Actions runs despite enabled Actions, an active workflow, and verified OAuth permissions. Automatic push CI remains unverified and is not claimed fixed. Git-triggered Vercel production deployment is verified independently.
 
 ## Execution Handoff
 

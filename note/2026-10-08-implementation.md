@@ -62,3 +62,11 @@ CI 文件已准备，官方 actions 固定到本次 API 查证的 v5 commit SHA�
 - Actions enabled、workflow active，但此前 push 未生成 run。添加 workflow_dispatch 后手动 run 37764464629 正常启动；暂不将手动执行算作 push CI 成功。当前 Git 使用系统 osxkeychain，下一次推送改用已核实 MortyYJT 的 gh credential helper，隔离凭据来源这一变量。未读取或打印任何 token。
 
 - 手动 CI run 37764464629 全部通过（npm ci、lint、typecheck、14 tests、build），commit 6b45c17。gh helper 推送 aa1783a 后仍无 push run，因此凭据来源假设未被支持。下一次使用显式 push branches 配置测试事件解析；仍不将手动 CI 等同自动 CI。
+
+## 发布验收结果
+
+- 新站已生产上线；新库历史仅包含 MortyYJT 昵称身份，无旧库历史。旧项目 Git 连接保持断开，历史部署未删除。
+- Git 自动 CD 已验证：main 推送触发同名 Vercel 项目生产构建；commit 258e1ce 对应部署 BtPUAGfhk3MTux6mJo7MTqDfAgQR（最终状态由发布时核实）。没有使用 CLI 手工上传作为 CD 证据。
+- CI 手动远端运行 37764464629 全部成功，产品代码与当前版本一致；最终文档提交将再次 dispatch，最终结果在回复中链接。自动 push CI 仍未触发：显式 branches 配置与切换 verified gh OAuth helper 均未解决，OAuth repo / workflow 权限、非 fork、Actions enabled、active workflow 已核对。原因未确定，不能宣称自动 CI 修复。
+- 生产浏览器 1440 宽无横向溢出；中文深色截图已保存在仓库外。真实手机和冷启动存储拒绝边界仍沿用本地验收记录。
+- 本地 lint、typecheck、14 tests、production build 已通过；发布增量已检查生成的 canonical / OG / sitemap / robots。
