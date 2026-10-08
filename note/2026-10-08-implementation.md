@@ -60,3 +60,5 @@ CI 文件已准备，官方 actions 固定到本次 API 查证的 v5 commit SHA�
 - 线上首页、简历、项目、robots、sitemap 均 HTTP 200；未知路径 HTTP 404。canonical / Open Graph URL 均为实际生产域名，sitemap 包含三个产品路由。
 - 生产浏览器语言及 light 偏好跨页、刷新、404 保持；项目页控制台无 warning / error。页面初始 SSR 为中文，hydration 后恢复英文，验收等待偏好控件出现后核实。
 - Actions enabled、workflow active，但此前 push 未生成 run。添加 workflow_dispatch 后手动 run 37764464629 正常启动；暂不将手动执行算作 push CI 成功。当前 Git 使用系统 osxkeychain，下一次推送改用已核实 MortyYJT 的 gh credential helper，隔离凭据来源这一变量。未读取或打印任何 token。
+
+- 手动 CI run 37764464629 全部通过（npm ci、lint、typecheck、14 tests、build），commit 6b45c17。gh helper 推送 aa1783a 后仍无 push run，因此凭据来源假设未被支持。下一次使用显式 push branches 配置测试事件解析；仍不将手动 CI 等同自动 CI。
