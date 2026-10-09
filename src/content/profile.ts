@@ -12,8 +12,8 @@ export const profile: Profile = {
     en: "Turning ideas into things that work.",
   },
   about: {
-    zh: "我是谷鱼Y，也可以叫我 MortyYJT。这里是我的一小块互联网：记录正在做的项目，也留下学习和探索的痕迹。最近的实践围绕 AI 助手与申请规划工具展开，从一个想法开始，逐步把交互、数据和实现连接起来。",
-    en: "I'm MortyYJT, also known as 谷鱼Y. This is my little corner of the internet: a place for projects, learning, and things I'm figuring out. My recent work explores AI assistants and application planning tools, connecting ideas with interfaces, data, and implementation.",
+    zh: "我是谷鱼Y，也可以叫我 MortyYJT。这里是我的一小块互联网：记录正在做的项目，也留下学习和探索的痕迹。最近的实践围绕留学申请规划和 AI agent 工作流展开，从一个想法开始，逐步把交互、数据和实现连接起来。",
+    en: "I'm MortyYJT, also known as 谷鱼Y. This is my little corner of the internet: a place for projects, learning, and things I'm figuring out. My recent work explores application planning and AI agent workflows, connecting ideas with interfaces, data, and implementation.",
   },
   githubUrl: "https://github.com/MortyYJT",
   resumeIntro: {

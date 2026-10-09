@@ -2,33 +2,19 @@ import type { Project } from "./types";
 
 export const projects: readonly Project[] = [
   {
-    id: "commerce-support",
-    title: { zh: "Commerce Support Agent", en: "Commerce Support Agent" },
-    summary: {
-      zh: "围绕电商客服场景的 AI 对话工具。公开实现包含流式回复、对话上下文处理，以及请求取消和错误反馈。",
-      en: "An AI chat tool exploring e-commerce support. The public implementation includes streaming responses, conversation context handling, request cancellation, and error feedback.",
-    },
-    technologies: ["Python", "FastAPI", "LangChain", "SSE"],
-    repositoryUrl: "https://github.com/MortyYJT/commerce-support-agent",
-    status: "in-progress",
-    evidence: [
-      "https://github.com/MortyYJT/commerce-support-agent/blob/main/src/commerce_support/routes.py",
-      "https://github.com/MortyYJT/commerce-support-agent/blob/main/src/commerce_support/services.py",
-    ],
-  },
-  {
     id: "offerpilot",
     title: { zh: "OfferPilot", en: "OfferPilot" },
     summary: {
-      zh: "留学申请规划工具的探索。当前公开实现围绕用户资料、申请路线图与任务管理展开，使用 Next.js 界面与 FastAPI 服务。",
-      en: "An exploration of application planning tools. The current public implementation covers profiles, application roadmaps, and task management with a Next.js interface and FastAPI service.",
+      zh: "澳洲硕士申请的长期规划工具。已实现用户资料、带官方出处的申请路线图与任务管理，以及申请材料库（上传、版本、归档）和逐条对应官方要求的材料审核记录。尚未接入模型，录取数据仍标为待核验。",
+      en: "A long-horizon planner for Australian master's applications. Implemented so far: applicant profiles, a sourced application roadmap with task management, a material library (upload, versions, archiving), and review records tied to official requirements. No model is connected yet, and admission data is still marked as pending verification.",
     },
-    technologies: ["Next.js", "TypeScript", "FastAPI", "SQLAlchemy"],
+    technologies: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL"],
     repositoryUrl: "https://github.com/MortyYJT/offerpilot",
     status: "in-progress",
     evidence: [
       "https://github.com/MortyYJT/offerpilot/blob/main/api/app/routers/roadmap.py",
-      "https://github.com/MortyYJT/offerpilot/blob/main/web/package.json",
+      "https://github.com/MortyYJT/offerpilot/blob/main/api/app/routers/documents.py",
+      "https://github.com/MortyYJT/offerpilot/blob/main/api/app/routers/review_criteria.py",
     ],
   },
 ];
