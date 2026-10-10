@@ -8,6 +8,7 @@ Applies throughout `personal-website-guyuy`. Follow higher-priority instructions
 - Identify the owner only as `MortyYJT` or `谷鱼Y`, including repository content and Git attribution. Never commit the owner's real name, secrets, private contact details, or identifying local paths.
 - Communicate in Chinese; write engineering docs and source comments in English. Put Chinese planning and milestone evidence in `note/`; preserve intended bilingual UI content.
 - Honor existing authorization and agreed workflow stages; do not add routine approval gates or repeat permission requests. Preserve user work. Report verified results and explicitly identify anything not run or not verified.
+- Session hygiene: when the context window is getting full, or the work moves to a new stage or an unrelated task, proactively write or update `note/handoff.md` (current state, next steps, open questions, conventions), commit it, start a fresh session whose opening prompt points to that file, and archive the old session. Tell the user in one line at most; do everything else automatically.
 
 ## Read before the relevant task
 
