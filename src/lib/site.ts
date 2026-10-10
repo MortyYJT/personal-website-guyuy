@@ -1,4 +1,4 @@
-export const siteOrigin = "https://personal-website-guyuy.vercel.app";
+export const siteOrigin = "https://mortyyjt.github.io";
 
 export const siteOpenGraph = {
   title: "谷鱼Y · MortyYJT",
