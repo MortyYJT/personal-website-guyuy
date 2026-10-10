@@ -35,11 +35,27 @@ export const projects: readonly Project[] = [
     ],
   },
   {
+    id: "sagesense",
+    title: { zh: "SageSense", en: "SageSense" },
+    summary: {
+      zh: "面向老年人的 Android 防诈骗助手，黑客松原型。在用户授权下检查通知和来电号码，在本地给出可解释的风险提示，并由 FastAPI 后端提供带官方出处的中英双语问答。团队项目，我担任总负责人，编写了几乎全部代码。",
+      en: "An Android anti-scam companion for older adults, built as a hackathon prototype. With permission it checks notifications and caller numbers, raises explainable risk warnings on-device, and offers a bilingual, citation-backed advisor through a FastAPI backend. A team project that I led and wrote almost all of the code for.",
+    },
+    technologies: ["Kotlin", "Jetpack Compose", "Python", "FastAPI"],
+    repositoryUrl: "https://github.com/MortyYJT/sagesense",
+    status: "implemented",
+    year: "2026",
+    evidence: [
+      "https://github.com/MortyYJT/sagesense/blob/main/android/app/src/main/java/com/mortyyjt/sagesense/risk/RiskAnalyzer.kt",
+      "https://github.com/MortyYJT/sagesense/blob/main/backend/app/agent.py",
+    ],
+  },
+  {
     id: "garbage-collection-inc",
     title: { zh: "Garbage Collection Inc", en: "Garbage Collection Inc" },
     summary: {
-      zh: "以废弃月球设施为背景的 Java 控制台生存游戏：回收废料、完成公司配额，应对生物、感染和天气异常。仓库包含一个控制台游戏引擎和 src/game 下的玩法系统，天气系统有回归测试。",
-      en: "A Java console survival game set in derelict lunar facilities: recover scrap, meet company quotas, and survive creatures, infection, and weather anomalies. The repository holds a console game engine and the gameplay systems under src/game, with regression tests for weather.",
+      zh: "以废弃月球设施为背景的 Java 控制台生存游戏：回收废料、完成公司配额，应对生物、感染和天气异常。控制台引擎由课程提供，玩法系统在 src/game 下，天气系统有回归测试。",
+      en: "A Java console survival game set in derelict lunar facilities: recover scrap, meet company quotas, and survive creatures, infection, and weather anomalies. The console engine was provided by the course; the gameplay systems live under src/game, with regression tests for weather.",
     },
     technologies: ["Java", "Maven"],
     repositoryUrl: "https://github.com/MortyYJT/Garbage-Collection-Inc",
