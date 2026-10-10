@@ -26,3 +26,8 @@ jobs:
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: 1
+      - run: npm run build
+        name: Static export build (GitHub Pages)
+        env:
+          STATIC_EXPORT: "1"
+          NEXT_TELEMETRY_DISABLED: 1
