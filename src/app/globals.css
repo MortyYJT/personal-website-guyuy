@@ -842,28 +842,6 @@ p {
   text-underline-offset: 3px;
 }
 
-.music-icon-button {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--muted);
-}
-.music-icon-button:hover {
-  background: var(--hover);
-}
-.music-icon-button svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-}
-.music-icon-button[aria-pressed="false"] {
-  color: var(--subtle);
-}
 .card-music.is-open {
   overflow: visible;
   z-index: 5;
@@ -875,11 +853,9 @@ p {
   width: min(352px, calc(100vw - 40px));
   padding: 10px;
   border-radius: 18px;
-  background: var(--pill);
+  background: var(--canvas);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
 }
 .song-frame {
   display: block;
@@ -892,13 +868,21 @@ p {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 11px;
   line-height: 1.4;
   color: var(--subtle);
 }
-.song-popover-bar span {
-  flex: 1;
+.song-popover-note {
+  margin: 8px 2px 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--subtle);
+}
+.song-popover-bar a {
+  margin-right: auto;
+  color: var(--accent);
+  font-size: 12px;
 }
 .song-popover-bar button {
   min-height: 30px;

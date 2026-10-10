@@ -10,3 +10,8 @@ export function neteaseSongUrl(songId: string): string | null {
   }).toString();
   return url.toString();
 }
+
+/** Public NetEase song page, for visitors whose region cannot play the embed. */
+export function neteaseSongPage(songId: string): string | null {
+  return /^\d+$/.test(songId) ? `https://music.163.com/song?id=${songId}` : null;
+}
