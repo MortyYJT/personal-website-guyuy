@@ -1,0 +1,9 @@
+# Like counter for the personal website. Deploy steps: workers/likes/README.md
+name = "guyuy-likes"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+
+[[kv_namespaces]]
+binding = "LIKES"
+# Replace with the id printed by `npx wrangler kv namespace create LIKES`.
+id = "REPLACE_WITH_KV_NAMESPACE_ID"

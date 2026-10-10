@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Averia_Gruesa_Libre } from "next/font/google";
+import { Averia_Gruesa_Libre, Dancing_Script } from "next/font/google";
 import "./globals.css";
+import { HelloIntro } from "../components/hello-intro";
 import { PersistentPlayer } from "../components/persistent-player";
 import { PreferencesProvider } from "../components/preferences-provider";
 import { siteOpenGraph, siteOrigin } from "../lib/site";
@@ -10,6 +11,11 @@ const display = Averia_Gruesa_Libre({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-display",
+});
+const script = Dancing_Script({
+  weight: "600",
+  subsets: ["latin"],
+  variable: "--font-script",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-CN"
-      className={display.variable}
+      className={`${display.variable} ${script.variable}`}
       data-theme="light"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
@@ -44,6 +50,7 @@ export default function RootLayout({
         <PreferencesProvider>
           {children}
           <PersistentPlayer />
+          <HelloIntro />
         </PreferencesProvider>
       </body>
     </html>

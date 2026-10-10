@@ -752,6 +752,53 @@ p {
   background: #eef4f1;
   color: #1f2328;
 }
+.like-button {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  color: #f08ca0;
+}
+.like-button svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  transition: fill 0.2s;
+}
+.like-button.is-liked svg {
+  fill: currentColor;
+}
+.like-button.is-liked {
+  cursor: default;
+}
+.like-button.is-popping svg {
+  animation: heart-pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes heart-pop {
+  40% {
+    transform: scale(1.35);
+  }
+}
+.like-count {
+  position: absolute;
+  top: -10px;
+  right: -14px;
+  min-width: 24px;
+  padding: 1px 7px;
+  border-radius: 99px;
+  background: var(--pill);
+  border: 1px solid var(--glass-border);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
 .social-icon svg {
   width: 24px;
   height: 24px;
@@ -867,6 +914,37 @@ p {
   flex-wrap: wrap;
   gap: 8px 18px;
   font-size: 14px;
+}
+/* Education timeline and music list on the profile page. */
+.timeline {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.timeline strong {
+  font-weight: 500;
+  font-size: 15px;
+}
+.timeline p {
+  margin: 4px 0 0;
+}
+.music-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.music-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.music-list li span:last-child {
+  color: var(--muted);
+  font-size: 13px;
 }
 /* Projects and friends: a grid of glass cards, on a wider column. */
 main:has(.gallery-page) {
@@ -1097,4 +1175,80 @@ a.gallery-card:hover {
   .art-rain span {
     top: var(--still);
   }
+}
+
+/* Opening: a handwritten "hello" draws itself, fills, then the curtain lifts. */
+.hello-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--canvas);
+  animation: hello-curtain 2.9s ease forwards;
+}
+.hello-word {
+  width: min(560px, 82vw);
+  overflow: visible;
+}
+.hello-word text {
+  font-family: var(--font-script), cursive;
+  font-size: 205px;
+  fill: url(#hello-ink);
+  fill-opacity: 0;
+  stroke: url(#hello-ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation:
+    hello-draw 1.7s cubic-bezier(0.55, 0.1, 0.35, 1) 0.15s forwards,
+    hello-fill 0.6s ease 1.55s forwards;
+}
+.hello-skip {
+  position: absolute;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+}
+.hello-skip:hover {
+  background: var(--hover);
+}
+@keyframes hello-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hello-fill {
+  to {
+    fill-opacity: 1;
+  }
+}
+@keyframes hello-curtain {
+  0%,
+  78% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hello-intro {
+    display: none;
+  }
+}
+:root[data-intro] .card,
+:root[data-intro] .card-social,
+:root[data-intro] .persistent-player {
+  animation-play-state: paused;
 }

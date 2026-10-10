@@ -26,6 +26,7 @@ jobs:
         env:
           STATIC_EXPORT: "1"
           NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_LIKES_ENDPOINT: ${{ vars.LIKES_ENDPOINT }}
       - name: Push the export to the Pages repository
         env:
           DEPLOY_KEY: ${{ secrets.PAGES_DEPLOY_KEY }}
