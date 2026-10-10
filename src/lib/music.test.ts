@@ -1,22 +1,18 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { neteaseSongPage, neteaseSongUrl } from "./music.ts";
+import { bandcampEmbedUrl } from "./music.ts";
 
-test("a numeric song id becomes the official single-song outchain player", () => {
-  const url = new URL(neteaseSongUrl("39227624")!);
-  assert.equal(url.origin, "https://music.163.com");
-  assert.equal(url.pathname, "/outchain/player");
-  assert.equal(url.searchParams.get("type"), "2");
-  assert.equal(url.searchParams.get("id"), "39227624");
-  assert.equal(url.searchParams.get("auto"), "1");
+test("builds the official small Bandcamp player for one album track", () => {
+  assert.equal(
+    bandcampEmbedUrl({ album: "2955245981", track: "1570961482" }, { background: "ffffff", link: "4a9b78" }),
+    "https://bandcamp.com/EmbeddedPlayer/album=2955245981/size=small/bgcol=ffffff/linkcol=4a9b78/track=1570961482/transparent=true/",
+  );
 });
 
-test("anything that is not a plain digit id is rejected", () => {
-  for (const id of ["", "  ", "12a", "1&auto=0", "javascript:alert(1)", "-5"])
-    assert.equal(neteaseSongUrl(id), null, JSON.stringify(id));
-});
-
-test("each song links to its NetEase page as a fallback", () => {
-  assert.equal(neteaseSongPage("39227624"), "https://music.163.com/song?id=39227624");
-  assert.equal(neteaseSongPage("abc"), null);
+test("rejects ids or colours that could alter the embed path", () => {
+  const colours = { background: "ffffff", link: "4a9b78" };
+  assert.equal(bandcampEmbedUrl({ album: "29/../x", track: "1" }, colours), null);
+  assert.equal(bandcampEmbedUrl({ album: "1", track: "" }, colours), null);
+  assert.equal(bandcampEmbedUrl({ album: "1", track: "2" }, { background: "#fff", link: "4a9b78" }), null);
+  assert.equal(bandcampEmbedUrl({ album: "1", track: "2" }, { background: "ffffff", link: "red" }), null);
 });

@@ -1,17 +1,16 @@
-/** Official NetEase Cloud Music single-song outchain player, or null for an invalid id. */
-export function neteaseSongUrl(songId: string): string | null {
-  if (!/^\d+$/.test(songId)) return null;
-  const url = new URL("https://music.163.com/outchain/player");
-  url.search = new URLSearchParams({
-    type: "2",
-    id: songId,
-    auto: "1",
-    height: "66",
-  }).toString();
-  return url.toString();
-}
+const digits = /^\d+$/;
+const hex = /^[0-9a-f]{6}$/i;
 
-/** Public NetEase song page, for visitors whose region cannot play the embed. */
-export function neteaseSongPage(songId: string): string | null {
-  return /^\d+$/.test(songId) ? `https://music.163.com/song?id=${songId}` : null;
+/** Official Bandcamp small embedded player for one album track, or null for unsafe input. */
+export function bandcampEmbedUrl(
+  ids: { album: string; track: string },
+  colours: { background: string; link: string },
+): string | null {
+  if (!digits.test(ids.album) || !digits.test(ids.track)) return null;
+  if (!hex.test(colours.background) || !hex.test(colours.link)) return null;
+  return (
+    "https://bandcamp.com/EmbeddedPlayer/" +
+    `album=${ids.album}/size=small/bgcol=${colours.background}/linkcol=${colours.link}/` +
+    `track=${ids.track}/transparent=true/`
+  );
 }

@@ -31,7 +31,7 @@ one viewport on wide screens, like the reference. About and stack move off the h
 remain on `/resume`); the project card becomes a small "latest project" card.
 
 Wide (>= 900px): the grid is centred in the viewport with fixed tracks `230px 340px 280px` and
-rows `130px 140px 140px 58px`:
+rows `130px 140px 140px 62px`:
 
 ```
 nav      art    clock

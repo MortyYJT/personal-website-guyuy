@@ -9,7 +9,7 @@ import {
 import type { Locale, Preferences, Theme } from "../content/types";
 import { readPreferences, writePreferences } from "../lib/preferences";
 
-const defaults: Preferences = { locale: "zh", theme: "dark" };
+const defaults: Preferences = { locale: "zh", theme: "light" };
 let current = defaults;
 const listeners = new Set<() => void>();
 

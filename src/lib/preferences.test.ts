@@ -6,8 +6,8 @@ import {
   writePreferences,
 } from "./preferences.ts";
 
-test("unavailable storage uses Chinese and dark defaults", () => {
-  assert.deepEqual(readPreferences(undefined), { locale: "zh", theme: "dark" });
+test("unavailable storage uses Chinese and light defaults", () => {
+  assert.deepEqual(readPreferences(undefined), { locale: "zh", theme: "light" });
 });
 test("valid saved preferences are restored", () => {
   assert.deepEqual(
@@ -18,24 +18,24 @@ test("valid saved preferences are restored", () => {
 test("malformed JSON cannot break preference reading", () => {
   assert.deepEqual(readPreferences({ getItem: () => "invalid{" }), {
     locale: "zh",
-    theme: "dark",
+    theme: "light",
   });
 });
 test("unknown fields fall back independently", () => {
   assert.deepEqual(
-    readPreferences({ getItem: () => '{"locale":"fr","theme":"light"}' }),
-    { locale: "zh", theme: "light" },
+    readPreferences({ getItem: () => '{"locale":"fr","theme":"dark"}' }),
+    { locale: "zh", theme: "dark" },
   );
   assert.deepEqual(
     readPreferences({ getItem: () => '{"locale":"en","theme":"neon"}' }),
-    { locale: "en", theme: "dark" },
+    { locale: "en", theme: "light" },
   );
 });
 test("missing values and non-object JSON use safe defaults", () => {
   for (const raw of [null, "null", "[]", '"en"', "{}"]) {
     assert.deepEqual(readPreferences({ getItem: () => raw }), {
       locale: "zh",
-      theme: "dark",
+      theme: "light",
     });
   }
 });
@@ -46,7 +46,7 @@ test("denied storage reads do not throw", () => {
         throw new Error("denied");
       },
     }),
-    { locale: "zh", theme: "dark" },
+    { locale: "zh", theme: "light" },
   );
 });
 test("preferences persist as one versioned value", () => {

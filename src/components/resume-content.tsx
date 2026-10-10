@@ -5,7 +5,7 @@ import { projects } from "../content/projects";
 import { ui } from "../content/ui";
 import { getPublishableProjects } from "../lib/content";
 import { usePreferences } from "./preferences-provider";
-import { FishMark } from "./fish-mark";
+import { SproutMark } from "./sprout-mark";
 import { ProjectEntry } from "./project-entry";
 export function ResumeContent() {
   const { locale } = usePreferences();
@@ -16,7 +16,7 @@ export function ResumeContent() {
         ← {text.home}
       </Link>
       <header className="document-heading">
-        <FishMark />
+        <SproutMark />
         <p className="eyebrow">{text.resume}</p>
         <h1>{locale === "zh" ? "谷鱼Y" : "MortyYJT"}</h1>
         <p>{profile.resumeIntro[locale]}</p>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ui } from "../content/ui";
 import { usePreferences } from "./preferences-provider";
-import { FishMark } from "./fish-mark";
+import { SproutMark } from "./sprout-mark";
 export function SiteHeader() {
   const { locale, theme, setLocale, setTheme } = usePreferences();
   const text = ui[locale];
@@ -19,7 +19,7 @@ export function SiteHeader() {
           className="brand"
           aria-label={locale === "zh" ? "谷鱼Y 首页" : "MortyYJT home"}
         >
-          <FishMark /> <span>{locale === "zh" ? "谷鱼Y" : "MortyYJT"}</span>
+          <SproutMark /> <span>{locale === "zh" ? "谷鱼Y" : "MortyYJT"}</span>
         </Link>
         <span className="nav-divider" aria-hidden="true" />
         <Link

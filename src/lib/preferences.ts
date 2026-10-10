@@ -4,7 +4,7 @@ export const preferenceKey = "guyuy:preferences:v1";
 export function readPreferences(
   storage: Pick<Storage, "getItem"> | undefined,
 ): Preferences {
-  const defaults: Preferences = { locale: "zh", theme: "dark" };
+  const defaults: Preferences = { locale: "zh", theme: "light" };
   try {
     const raw = storage?.getItem(preferenceKey);
     const value: unknown = raw ? JSON.parse(raw) : null;
@@ -13,7 +13,7 @@ export function readPreferences(
     const saved = value as Record<string, unknown>;
     return {
       locale: saved.locale === "en" ? "en" : "zh",
-      theme: saved.theme === "light" ? "light" : "dark",
+      theme: saved.theme === "dark" ? "dark" : "light",
     };
   } catch {
     return defaults;
