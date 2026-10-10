@@ -4,33 +4,52 @@ import { projects } from "../content/projects";
 import { ui } from "../content/ui";
 import { getPublishableProjects } from "../lib/content";
 import { usePreferences } from "./preferences-provider";
-import { ProjectEntry } from "./project-entry";
+
 export function ProjectsContent() {
   const { locale } = usePreferences();
   const text = ui[locale];
   return (
-    <div className="document-page">
-      <Link className="back-link" href="/">
-        ← {text.home}
-      </Link>
-      <header className="document-heading">
-        <p className="eyebrow">
-          {locale === "zh"
-            ? "想法 · 实践 · 迭代"
-            : "IDEAS · PRACTICE · ITERATION"}
-        </p>
-        <h1>
-          {text.experience}
-          <span className="greeting-dot">.</span>
-        </h1>
+    <div className="gallery-page">
+      <header className="gallery-heading">
+        <Link className="back-link" href="/">
+          ← {text.home}
+        </Link>
+        <h1>{text.projectsTitle}</h1>
         <p>{text.projectIntro}</p>
       </header>
-      <div className="detailed-projects">
+      <div className="gallery-grid">
         {getPublishableProjects(projects).map((project) => (
-          <ProjectEntry key={project.id} project={project} detailed />
+          <article className="gallery-card" key={project.id}>
+            <div className="gallery-card-head">
+              <span className="project-logo" aria-hidden="true">
+                {project.title.en}
+              </span>
+              <div>
+                <h2>
+                  {project.title[locale]} <span className="gallery-year">{project.year}</span>
+                </h2>
+                <ul className="chip-list" aria-label={text.stack}>
+                  {project.technologies.map((tech) => (
+                    <li key={tech}>{tech}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <p>{project.summary[locale]}</p>
+            <div className="gallery-actions">
+              <a className="chip-button" href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
+                {text.repository} <span aria-hidden="true">↗</span>
+              </a>
+              {project.evidence.map((url, index) => (
+                <a className="chip-link" href={url} target="_blank" rel="noopener noreferrer" key={url}>
+                  {text.evidence} {index + 1}
+                </a>
+              ))}
+            </div>
+          </article>
         ))}
       </div>
-      <p className="evidence-note">{text.limits}</p>
+      <p className="gallery-note">{text.limits}</p>
     </div>
   );
 }

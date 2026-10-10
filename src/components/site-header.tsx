@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { navItems } from "../content/nav";
 import { ui } from "../content/ui";
 import { switchTheme } from "./theme-transition";
 import { usePreferences } from "./preferences-provider";
@@ -23,20 +24,15 @@ export function SiteHeader() {
           <SproutMark /> <span>{locale === "zh" ? "谷鱼Y" : "MortyYJT"}</span>
         </Link>
         <span className="nav-divider" aria-hidden="true" />
-        <Link
-          href="/resume"
-          aria-current={pathname === "/resume" ? "page" : undefined}
-        >
-          {text.resume}
-        </Link>
-        <Link
-          href="/experience/projects"
-          aria-current={
-            pathname === "/experience/projects" ? "page" : undefined
-          }
-        >
-          {text.experience}
-        </Link>
+        {navItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={pathname === item.href ? "page" : undefined}
+          >
+            {item.label[locale]}
+          </Link>
+        ))}
         <span className="nav-divider" aria-hidden="true" />
         <button
           className="locale-button"

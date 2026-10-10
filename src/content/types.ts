@@ -9,6 +9,8 @@ export type Project = {
   technologies: readonly string[];
   repositoryUrl: string;
   status: "in-progress" | "implemented";
+  /** Year the project started, shown on the project card. */
+  year: string;
   evidence: readonly string[];
 };
 export type Profile = {
