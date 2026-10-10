@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { profile } from "../../../content/profile";
 import { ui } from "../../../content/ui";
+import { switchTheme } from "../../theme-transition";
 import { usePreferences } from "../../preferences-provider";
 import { Avatar } from "./avatar";
 import { Card } from "./card";
@@ -39,7 +40,12 @@ export function NavCard() {
         </button>
         <button
           aria-label={theme === "dark" ? text.light : text.dark}
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={(event) =>
+            switchTheme(theme === "dark" ? "light" : "dark", setTheme, {
+              x: event.clientX,
+              y: event.clientY,
+            })
+          }
         >
           {theme === "dark" ? "☀" : "☾"}
         </button>

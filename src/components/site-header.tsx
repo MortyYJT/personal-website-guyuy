@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ui } from "../content/ui";
+import { switchTheme } from "./theme-transition";
 import { usePreferences } from "./preferences-provider";
 import { SproutMark } from "./sprout-mark";
 export function SiteHeader() {
@@ -47,7 +48,12 @@ export function SiteHeader() {
         <button
           className="theme-button"
           aria-label={theme === "dark" ? text.light : text.dark}
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={(event) =>
+            switchTheme(theme === "dark" ? "light" : "dark", setTheme, {
+              x: event.clientX,
+              y: event.clientY,
+            })
+          }
         >
           {theme === "dark" ? (
             <svg viewBox="0 0 24 24" aria-hidden="true">
