@@ -10,6 +10,7 @@ const project: Project = {
   technologies: [],
   repositoryUrl: "https://github.com/MortyYJT/example",
   status: "in-progress",
+  year: "2026",
   evidence: ["https://github.com/MortyYJT/example/blob/main/package.json"],
 };
 test("publishing excludes a project with no evidence", () => {

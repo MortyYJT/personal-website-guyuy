@@ -20,7 +20,7 @@ export function ProjectCard() {
         </a>
       </h2>
       <p className="project-card-summary">{project.summary[locale]}</p>
-      <Link className="text-link" href="/experience/projects">
+      <Link className="text-link" href="/projects">
         {text.explore} <span aria-hidden="true">→</span>
       </Link>
     </Card>

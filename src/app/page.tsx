@@ -1,4 +1,3 @@
-import { OpeningAnimation } from "../components/opening-animation";
 import type { Metadata } from "next";
 import { siteOpenGraph } from "../lib/site";
 import { SiteShell } from "../components/site-shell";
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <SiteShell home>
-      <OpeningAnimation />
       <HomeContent />
     </SiteShell>
   );

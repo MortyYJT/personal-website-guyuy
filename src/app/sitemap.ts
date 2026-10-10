@@ -5,7 +5,7 @@ import { siteOrigin } from "../lib/site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ["/", "/resume", "/experience/projects"].map((path) => ({
+  return ["/", "/profile", "/projects", "/friends"].map((path) => ({
     url: new URL(path, siteOrigin).href,
   }));
 }

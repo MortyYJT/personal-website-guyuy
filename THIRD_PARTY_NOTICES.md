@@ -15,5 +15,5 @@ project is distributed under the MIT License, Copyright (c) 2025 YYsuni.
 
 ## Embedded services
 
-- The music card loads the official NetEase Cloud Music outchain player only after the visitor
-  clicks play. Track availability and licensing are controlled by NetEase Cloud Music.
+- The music card embeds Toby Fox's official Bandcamp player for "Undertale" from the UNDERTALE
+  Soundtrack (https://tobyfox.bandcamp.com/album/undertale-soundtrack). No audio is hosted here.

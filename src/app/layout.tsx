@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Averia_Gruesa_Libre } from "next/font/google";
 import "./globals.css";
+import { PersistentPlayer } from "../components/persistent-player";
 import { PreferencesProvider } from "../components/preferences-provider";
 import { siteOpenGraph, siteOrigin } from "../lib/site";
 
@@ -27,12 +28,12 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const themeScript = `try{const p=JSON.parse(localStorage.getItem('guyuy:preferences:v1')||'null');document.documentElement.dataset.theme=p&&p.theme==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}`;
+  const themeScript = `try{const p=JSON.parse(localStorage.getItem('guyuy:preferences:v1')||'null');document.documentElement.dataset.theme=p&&p.theme==='dark'?'dark':'light'}catch{document.documentElement.dataset.theme='light'}`;
   return (
     <html
       lang="zh-CN"
       className={display.variable}
-      data-theme="dark"
+      data-theme="light"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
@@ -40,7 +41,10 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <PreferencesProvider>{children}</PreferencesProvider>
+        <PreferencesProvider>
+          {children}
+          <PersistentPlayer />
+        </PreferencesProvider>
       </body>
     </html>
   );

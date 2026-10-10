@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { navItems } from "../content/nav";
 import { ui } from "../content/ui";
+import { switchTheme } from "./theme-transition";
 import { usePreferences } from "./preferences-provider";
-import { FishMark } from "./fish-mark";
+import { SproutMark } from "./sprout-mark";
 export function SiteHeader() {
   const { locale, theme, setLocale, setTheme } = usePreferences();
   const text = ui[locale];
@@ -19,23 +21,18 @@ export function SiteHeader() {
           className="brand"
           aria-label={locale === "zh" ? "谷鱼Y 首页" : "MortyYJT home"}
         >
-          <FishMark /> <span>{locale === "zh" ? "谷鱼Y" : "MortyYJT"}</span>
+          <SproutMark /> <span>{locale === "zh" ? "谷鱼Y" : "MortyYJT"}</span>
         </Link>
         <span className="nav-divider" aria-hidden="true" />
-        <Link
-          href="/resume"
-          aria-current={pathname === "/resume" ? "page" : undefined}
-        >
-          {text.resume}
-        </Link>
-        <Link
-          href="/experience/projects"
-          aria-current={
-            pathname === "/experience/projects" ? "page" : undefined
-          }
-        >
-          {text.experience}
-        </Link>
+        {navItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={pathname === item.href ? "page" : undefined}
+          >
+            {item.label[locale]}
+          </Link>
+        ))}
         <span className="nav-divider" aria-hidden="true" />
         <button
           className="locale-button"
@@ -47,7 +44,12 @@ export function SiteHeader() {
         <button
           className="theme-button"
           aria-label={theme === "dark" ? text.light : text.dark}
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={(event) =>
+            switchTheme(theme === "dark" ? "light" : "dark", setTheme, {
+              x: event.clientX,
+              y: event.clientY,
+            })
+          }
         >
           {theme === "dark" ? (
             <svg viewBox="0 0 24 24" aria-hidden="true">

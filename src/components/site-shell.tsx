@@ -24,7 +24,8 @@ export function SiteShell({
         {locale === "zh" ? "跳到内容" : "Skip to content"}
       </a>
       <SiteHeader />
-      <main id="main" className="content-column" tabIndex={-1}>
+      {/* Each page mounts its own shell, so the enter animation replays on every route change. */}
+      <main id="main" className="content-column page-enter" tabIndex={-1}>
         {children}
       </main>
       <footer className="site-footer content-column">

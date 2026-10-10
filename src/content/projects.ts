@@ -11,6 +11,7 @@ export const projects: readonly Project[] = [
     technologies: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL"],
     repositoryUrl: "https://github.com/MortyYJT/offerpilot",
     status: "in-progress",
+    year: "2026",
     evidence: [
       "https://github.com/MortyYJT/offerpilot/blob/main/api/app/routers/roadmap.py",
       "https://github.com/MortyYJT/offerpilot/blob/main/api/app/routers/documents.py",

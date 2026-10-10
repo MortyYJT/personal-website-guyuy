@@ -5,9 +5,9 @@ import { projects } from "../content/projects";
 import { ui } from "../content/ui";
 import { getPublishableProjects } from "../lib/content";
 import { usePreferences } from "./preferences-provider";
-import { FishMark } from "./fish-mark";
+import { SproutMark } from "./sprout-mark";
 import { ProjectEntry } from "./project-entry";
-export function ResumeContent() {
+export function ProfileContent() {
   const { locale } = usePreferences();
   const text = ui[locale];
   return (
@@ -16,8 +16,8 @@ export function ResumeContent() {
         ← {text.home}
       </Link>
       <header className="document-heading">
-        <FishMark />
-        <p className="eyebrow">{text.resume}</p>
+        <SproutMark />
+        <p className="eyebrow">{text.profilePage}</p>
         <h1>{locale === "zh" ? "谷鱼Y" : "MortyYJT"}</h1>
         <p>{profile.resumeIntro[locale]}</p>
         <a
@@ -38,7 +38,7 @@ export function ResumeContent() {
         {getPublishableProjects(projects).map((project) => (
           <ProjectEntry project={project} key={project.id} />
         ))}
-        <Link className="text-link" href="/experience/projects">
+        <Link className="text-link" href="/projects">
           {text.explore} ↗
         </Link>
       </section>

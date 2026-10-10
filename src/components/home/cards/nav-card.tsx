@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
-import { profile } from "../../../content/profile";
+import { navItems } from "../../../content/nav";
 import { ui } from "../../../content/ui";
+import { switchTheme } from "../../theme-transition";
 import { usePreferences } from "../../preferences-provider";
+import { NavIcon } from "../../nav-icon";
 import { Avatar } from "./avatar";
 import { Card } from "./card";
 
@@ -17,17 +19,14 @@ export function NavCard() {
       </div>
       <nav aria-label={text.navigation}>
         <ul className="nav-card-links">
-          <li>
-            <Link href="/resume">{text.resume}</Link>
-          </li>
-          <li>
-            <Link href="/experience/projects">{text.experience}</Link>
-          </li>
-          <li>
-            <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer">
-              GitHub <span aria-hidden="true">↗</span>
-            </a>
-          </li>
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href}>
+                <NavIcon name={item.icon} />
+                {item.label[locale]}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
       <div className="nav-card-toggles">
@@ -39,7 +38,12 @@ export function NavCard() {
         </button>
         <button
           aria-label={theme === "dark" ? text.light : text.dark}
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={(event) =>
+            switchTheme(theme === "dark" ? "light" : "dark", setTheme, {
+              x: event.clientX,
+              y: event.clientY,
+            })
+          }
         >
           {theme === "dark" ? "☀" : "☾"}
         </button>
