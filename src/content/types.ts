@@ -17,9 +17,4 @@ export type Profile = {
   about: LocalizedText;
   githubUrl: string;
   resumeIntro: LocalizedText;
-  interests: readonly {
-    id: string;
-    label: LocalizedText;
-    entries: readonly LocalizedText[];
-  }[];
 };

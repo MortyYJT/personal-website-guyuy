@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
+import { Averia_Gruesa_Libre } from "next/font/google";
 import "./globals.css";
 import { PreferencesProvider } from "../components/preferences-provider";
 import { siteOpenGraph, siteOrigin } from "../lib/site";
+
+// Self-hosted at build time, so visitors never request Google Fonts.
+const display = Averia_Gruesa_Libre({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
@@ -23,6 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-CN"
+      className={display.variable}
       data-theme="dark"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
