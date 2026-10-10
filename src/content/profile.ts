@@ -36,3 +36,34 @@ export const stack = [
     items: ["LangChain", "Git", "GitHub"],
   },
 ];
+
+export const education = [
+  {
+    period: "2025.07 – 2026.06",
+    school: { zh: "莫纳什大学", en: "Monash University" },
+    detail: { zh: "计算机科学本科", en: "Bachelor of Computer Science" },
+  },
+  {
+    period: "2026.07 – 2028.06",
+    school: { zh: "墨尔本大学", en: "The University of Melbourne" },
+    detail: { zh: "转学继续本科", en: "Transferred to continue undergraduate study" },
+  },
+];
+
+export const favouriteGames: LocalizedText[] = [
+  { zh: "原神", en: "Genshin Impact" },
+  { zh: "崩坏：星穹铁道", en: "Honkai: Star Rail" },
+  { zh: "绝区零", en: "Zenless Zone Zero" },
+];
+
+// Listed only; the site does not host or embed copyrighted audio.
+export const favouriteMusic = [
+  { title: "昔涟", artist: "张韶涵 / HOYO-MiX" },
+  {
+    title: "I Really Want to Stay at Your House",
+    artist: "Rosa Walton / Hallie Coggins",
+  },
+  { title: "Undertale", artist: "Toby Fox" },
+  { title: "Snowship", artist: "Patricia Wilde" },
+  { title: "生きていたんだよな", artist: "宫野栞" },
+];

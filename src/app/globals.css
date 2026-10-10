@@ -915,6 +915,37 @@ p {
   gap: 8px 18px;
   font-size: 14px;
 }
+/* Education timeline and music list on the profile page. */
+.timeline {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.timeline strong {
+  font-weight: 500;
+  font-size: 15px;
+}
+.timeline p {
+  margin: 4px 0 0;
+}
+.music-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.music-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.music-list li span:last-child {
+  color: var(--muted);
+  font-size: 13px;
+}
 /* Projects and friends: a grid of glass cards, on a wider column. */
 main:has(.gallery-page) {
   width: min(1000px, calc(100% - 40px));

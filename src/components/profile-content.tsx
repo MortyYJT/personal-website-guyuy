@@ -1,6 +1,12 @@
 "use client";
 import Link from "next/link";
-import { profile, stack } from "../content/profile";
+import {
+  education,
+  favouriteGames,
+  favouriteMusic,
+  profile,
+  stack,
+} from "../content/profile";
 import { projects } from "../content/projects";
 import { ui } from "../content/ui";
 import { getPublishableProjects } from "../lib/content";
@@ -34,6 +40,20 @@ export function ProfileContent() {
         <p>{profile.about[locale]}</p>
       </section>
       <section className="document-section">
+        <h2>{text.education}</h2>
+        <ol className="timeline">
+          {education.map((entry) => (
+            <li className="stack-row" key={entry.period}>
+              <h3>{entry.period}</h3>
+              <div>
+                <strong>{entry.school[locale]}</strong>
+                <p>{entry.detail[locale]}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <section className="document-section">
         <h2>{text.selected}</h2>
         {getPublishableProjects(projects).map((project) => (
           <ProjectEntry project={project} key={project.id} />
@@ -57,6 +77,25 @@ export function ProfileContent() {
             </div>
           ))}
         </div>
+      </section>
+      <section className="document-section">
+        <h2>{text.games}</h2>
+        <ul className="stack-tags">
+          {favouriteGames.map((game) => (
+            <li key={game.en}>{game[locale]}</li>
+          ))}
+        </ul>
+      </section>
+      <section className="document-section">
+        <h2>{text.music}</h2>
+        <ul className="music-list">
+          {favouriteMusic.map((song) => (
+            <li key={song.title}>
+              <span>{song.title}</span>
+              <span>{song.artist}</span>
+            </li>
+          ))}
+        </ul>
       </section>
       <section className="document-section">
         <h2>{text.contact}</h2>
