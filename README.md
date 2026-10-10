@@ -48,8 +48,8 @@ Chinese and the light theme are the defaults. Explicit choices persist under `gu
 
 ## Deployment
 
-The app requires no database, authentication, API keys, analytics or environment variables. On Vercel, select **Next.js**, repository root, Node.js 24, and the default framework build/output settings. Connect the authorized GitHub repository and production branch for automatic deployments. GitHub Actions validates lint, types, tests and build without a Vercel token.
+The site itself needs no database, authentication or API keys. The only build-time variable is the optional `NEXT_PUBLIC_LIKES_ENDPOINT`. On Vercel, select **Next.js**, repository root, Node.js 24, and the default build settings.
 
-Repository: [MortyYJT/personal-website-guyuy](https://github.com/MortyYJT/personal-website-guyuy). Production: [personal-website-guyuy.vercel.app](https://personal-website-guyuy.vercel.app). The same-name Vercel project follows `main`; the initial repository bootstrap and production release were authorized on 2026-10-08. Canonical, Open Graph URL, robots, and sitemap metadata use the confirmed production origin in `src/lib/site.ts`. Update that origin when moving to a custom domain. Git-triggered production deployment is verified. Remote CI passes when manually dispatched; automatic push CI remains unresolved. Release evidence and limitations are recorded in `note/2026-10-08-implementation.md`.
+Repository: [MortyYJT/personal-website-guyuy](https://github.com/MortyYJT/personal-website-guyuy). Production: [mortyyjt.github.io](https://mortyyjt.github.io/); mirror: [personal-website-guyuy.vercel.app](https://personal-website-guyuy.vercel.app). Canonical, Open Graph, robots and sitemap URLs use the origin in `src/lib/site.ts`; update it when moving to a custom domain. CI runs lint, types, tests, the default build and the static export on every push and pull request.
 
 Local acceptance and remaining remote checks are recorded in `note/2026-10-08-implementation.md`. Agent instructions are indexed in `AGENTS.md`; detailed guidance is in `docs/engineering/agent-guidelines.md`.
