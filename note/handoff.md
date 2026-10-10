@@ -5,13 +5,17 @@
 ## 当前状态
 
 - 线上主站：https://mortyyjt.github.io/ （GitHub Pages，main 每次更新后由 `.github/workflows/pages.yml` 自动发布）；Vercel 是镜像。
-- PR #6 已合并（merge commit，Pages 部署成功，线上 /profile 已确认有经历、游戏、音乐）。main 上现有：毛玻璃首页、hello 开屏、点赞爱心（目前仅本地计数）、小档案（个人简介、经历、项目、技术栈、游戏、音乐、联系）、项目页 5 个项目（含 SageSense：用户是总负责人、写了几乎全部代码；Garbage Collection Inc 的控制台引擎由课程提供，只简短提一句）、友链页、跨页面播放器。
+- PR #6 已合并（merge commit，Pages 部署成功，线上 /profile 已确认有经历、游戏、音乐）。main 上现有：毛玻璃首页、hello 开屏、点赞爱心（目前仅本地计数）、小档案（个人简介、经历、项目、技术栈、游戏、音乐、联系）、项目页 5 个项目（含 SageSense：用户是总负责人、写了几乎全部代码；Garbage Collection Inc 的控制台引擎由课程提供，只简短提一句）、友链页、跨页面播放器。深色模式已改为纯黑极简（中性近黑底，无光晕、无颗粒，见 `note/2026-10-11-dark-plain.md`），不再是「夜雨青」。
 - 用户要求本项目尽量在同一个会话窗口里完成，不主动开新会话；只有上下文真的快满时才按规则交接。
 - AGENTS.md 已加 Session hygiene 规则：上下文快满或进入新阶段时，主动更新本文件、提交、开新会话并归档旧会话，只用一行告诉用户。
 
-## 下一步（按顺序）
+## 下一步
 
-1. **点赞后端部署**（需要用户的 Cloudflare 账号）：用户运行 `npx wrangler login`、`npx wrangler kv namespace create LIKES`、`npx wrangler secret put IP_SALT`，把 KV id 给 Claude。之后填进 `workers/likes/wrangler.toml` 执行 `npx wrangler deploy`，再设置 GitHub 仓库变量 `LIKES_ENDPOINT` 和 Vercel 环境变量 `NEXT_PUBLIC_LIKES_ENDPOINT`，触发一次部署后实测。
+- 暂无进行中的任务，等用户下一个需求。
+
+## 待办（暂缓，用户有空再做）
+
+- **点赞后端部署**（需要用户的 Cloudflare 账号）：用户运行 `npx wrangler login`、`npx wrangler kv namespace create LIKES`、`npx wrangler secret put IP_SALT`，把 KV id 给 Claude。之后填进 `workers/likes/wrangler.toml` 执行 `npx wrangler deploy`，再设置 GitHub 仓库变量 `LIKES_ENDPOINT` 和 Vercel 环境变量 `NEXT_PUBLIC_LIKES_ENDPOINT`，触发一次部署后实测。
 
 ## 约定（不要违反）
 

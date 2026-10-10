@@ -23,25 +23,26 @@
   color-scheme: light;
 }
 :root[data-theme="dark"] {
-  --canvas: #0e1716;
+  --canvas: #101211;
   --ink: #e6efea;
   --muted: #b0c3bb;
   --subtle: #7f9a90;
   --accent: #8fd3b0;
   --line: #ffffff12;
-  --pill: #14211fcc;
+  --pill: #161918cc;
   --hover: #ffffff0d;
   --active: #1d3a32;
-  --mark-highlight: #0e1716;
+  --mark-highlight: #101211;
   --tag: #ffffff08;
-  --glass: #ffffff0a;
-  --glass-border: #ffffff17;
+  --glass: #ffffff08;
+  --glass-border: #ffffff14;
   --glass-shadow: inset 0 1px 0 #ffffff12, 0 18px 44px #00000059;
   --lcd-bg: #091110;
   --lcd-off: #8fd3b012;
-  --blob-a: #1f5c4a73;
-  --blob-b: #23395f66;
-  --blob-c: #4b6b3c40;
+  /* Plain near-black canvas: no glow blobs in dark mode. */
+  --blob-a: transparent;
+  --blob-b: transparent;
+  --blob-c: transparent;
   color-scheme: dark;
 }
 * {
@@ -81,6 +82,10 @@ body::after {
   opacity: 0.045;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.9' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+/* The paper grain reads as dust on a dark canvas, so it is light-only. */
+:root[data-theme="dark"] body::after {
+  display: none;
 }
 a {
   color: inherit;
