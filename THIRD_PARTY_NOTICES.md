@@ -15,5 +15,8 @@ project is distributed under the MIT License, Copyright (c) 2025 YYsuni.
 
 ## Embedded services
 
-- The music card loads the official NetEase Cloud Music outchain player only after the visitor
-  clicks play. Track availability and licensing are controlled by NetEase Cloud Music.
+- The music card loads the official NetEase Cloud Music single-song outchain player only after the
+  visitor clicks play. Track availability and licensing are controlled by NetEase Cloud Music; the
+  five configured songs were unavailable from an Australian network on 2026-10-10.
+- The ambient "summer chimes" sound is synthesised in the browser with the Web Audio API; no
+  third-party audio is used.
