@@ -1,6 +1,6 @@
 # personal-website-guyuy
 
-A personal website for **MortyYJT / 谷鱼Y**. Built with Next.js App Router, React, strict TypeScript, and Tailwind CSS. The design follows the visual composition of [auberginewly's website](https://auberginewly.site/), using original fish branding and the owner's own source-backed content.
+A personal website for **MortyYJT / 谷鱼Y**. Built with Next.js App Router, React, strict TypeScript, and Tailwind CSS. Live at https://mortyyjt.github.io/ (GitHub Pages; Vercel mirror). The home page is a one-screen grid of frosted-glass cards inspired by [YYsuni/2025-blog-public](https://github.com/YYsuni/2025-blog-public) and [lvyovo-wiki.tech](https://lvyovo-wiki.tech/); no code or assets were copied (see `THIRD_PARTY_NOTICES.md`).
 
 ## Development
 
@@ -22,7 +22,7 @@ npm start
 | --- | --- |
 | `npm run lint` | Next.js and TypeScript ESLint checks |
 | `npm run typecheck` | Strict application checking |
-| `npm test` | Content filtering and defensive preference storage tests |
+| `npm test` | Unit tests for site logic and the like-counter Worker |
 | `npm run build` | Production build and static route generation |
 
 The configuration retains strict application checking and the framework-recommended `skipLibCheck` for dependency/generated declarations. Next.js emits duplicate global route declarations in development and production output; checking both declaration trees together fails independently of application code.
@@ -31,13 +31,20 @@ The toolchain pins TypeScript 6 because the current ESLint parser does not suppo
 
 ## Content and routes
 
-- `/`: introduction, about, resume entry, project previews, technologies and GitHub contact.
-- `/resume`: public HTML profile. No unverified employment, education or PDF download.
-- `/experience/projects`: project descriptions with links to the implementation evidence.
+- `/`: card grid (nav, greeting, clock, calendar, latest project, music, GitHub and like).
+- `/profile`: public profile, selected work and stack.
+- `/projects`: project cards with links to the implementation evidence.
+- `/friends`: sites of people the owner follows on GitHub.
 
-Edit `src/content/profile.ts`, `projects.ts` and `ui.ts`. Every visible project requires bilingual copy, a public GitHub repository and implementation evidence. Descriptions reflect public code, not claimed deployment outcomes. Unsourced optional interests are omitted along with their dock links. Use only **MortyYJT / 谷鱼Y** as the owner's identity.
+Edit `src/content/` (`profile.ts`, `projects.ts`, `friends.ts`, `nav.ts`, `site.ts`, `ui.ts`). Every visible project requires bilingual copy, a public GitHub repository and implementation evidence. Use only **MortyYJT / 谷鱼Y** as the owner's identity.
 
-Chinese and dark mode are the defaults. Explicit choices persist under `guyuy:preferences:v1` in local browser storage across routes and reloads. If storage is denied, controls continue working in memory; a fresh load uses the defaults. Reduced motion displays a stable hero phrase and disables animated scrolling.
+The music player (Toby Fox's official Bandcamp embed) lives in the root layout so it keeps playing across pages. The like counter is a Cloudflare Worker in `workers/likes/` (deploy steps there); without `NEXT_PUBLIC_LIKES_ENDPOINT` the heart works locally only.
+
+## Deployment
+
+Pushes to `main` build a static export (`STATIC_EXPORT=1`) and publish it to `MortyYJT/MortyYJT.github.io` (`.github/workflows/pages.yml`). Vercel builds the same code as a mirror.
+
+Chinese and the light theme are the defaults. Explicit choices persist under `guyuy:preferences:v1` in local browser storage across routes and reloads. If storage is denied, controls continue working in memory; a fresh load uses the defaults. Reduced motion skips the opening animation, card entrances and theme transition.
 
 ## Deployment
 
