@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages
+# Builds a static export of main and force-pushes it to MortyYJT/MortyYJT.github.io,
+# which GitHub Pages serves at https://mortyyjt.github.io/. Vercel stays as a mirror.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+        env:
+          STATIC_EXPORT: "1"
+          NEXT_TELEMETRY_DISABLED: 1
+      - name: Push the export to the Pages repository
+        env:
+          DEPLOY_KEY: ${{ secrets.PAGES_DEPLOY_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/pages_key
+          chmod 600 ~/.ssh/pages_key
+          # GitHub's published host key (from `gh api meta`), pinned instead of trusted on first use.
+          echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' >> ~/.ssh/known_hosts
+          touch out/.nojekyll
+          cd out
+          git init -q -b main
+          git config user.name MortyYJT
+          git config user.email 213947413+MortyYJT@users.noreply.github.com
+          git add -A
+          git commit -q -m "deploy: ${GITHUB_SHA}"
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/pages_key -o IdentitiesOnly=yes" \
+            git push --force git@github.com:MortyYJT/MortyYJT.github.io.git main
