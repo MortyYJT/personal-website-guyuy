@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Averia_Gruesa_Libre } from "next/font/google";
 import "./globals.css";
+import { PersistentPlayer } from "../components/persistent-player";
 import { PreferencesProvider } from "../components/preferences-provider";
 import { siteOpenGraph, siteOrigin } from "../lib/site";
 
@@ -40,7 +41,10 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <PreferencesProvider>{children}</PreferencesProvider>
+        <PreferencesProvider>
+          {children}
+          <PersistentPlayer />
+        </PreferencesProvider>
       </body>
     </html>
   );
