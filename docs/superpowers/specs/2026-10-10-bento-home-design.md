@@ -26,19 +26,24 @@ bilingual content, theme persistence, opening animation, SSR readability, and Ve
 
 ## Layout
 
-Desktop (>= 1024px), max width about 1100px, `grid-template-areas`:
+Revision (same day, owner feedback "too blocky, keep it on one screen"): compact cards that fit
+one viewport on wide screens, like the reference. About and stack move off the home page (they
+remain on `/resume`); the project card becomes a small "latest project" card.
+
+Wide (>= 900px): the grid is centred in the viewport with fixed tracks `230px 340px 280px` and
+rows `130px 140px 140px 58px`:
 
 ```
-nav   art    clock
-nav   hi     calendar
-proj  hi     calendar
-proj  about  music
-stack about  social
+nav      art    clock
+nav      hi     calendar
+project  hi     calendar
+project  music  social
 ```
 
-Tablet (600–1023px): two columns. Mobile (< 600px): one column ordered hi, project, about,
-music, clock, calendar, stack, social. On the home page the floating header pill is hidden on
-desktop (the nav card replaces it) and shown below 1024px; the nav card is hidden there.
+The header pill is hidden (the nav card replaces it) and the footer is pinned to the bottom.
+Tablet (600–899px): two columns and the header pill; scrolling allowed. Mobile (< 600px): one
+column ordered hi, project, music, art, clock, calendar, social; scrolling allowed, as on the
+reference site.
 
 ## Cards
 
@@ -49,9 +54,7 @@ desktop (the nav card replaces it) and shown below 1024px; the nav card is hidde
 | Hi | large avatar, time-of-day greeting, "I'm 谷鱼Y, nice to meet you", introduction | greeting (SSR renders a neutral "你好 / Hello") |
 | Clock | seven-segment HH:MM | time (SSR renders dashes) |
 | Calendar | month grid, Monday first, today highlighted | dates (SSR renders weekday header only) |
-| Project | first publishable project, link to `/experience/projects` | none |
-| About | `profile.about` | none |
-| Stack | stack tags | none |
+| Project | latest publishable project, three-line summary, link to `/experience/projects` | none |
 | Music | facade button, then NetEase iframe | iframe |
 | Social | GitHub, resume | none |
 

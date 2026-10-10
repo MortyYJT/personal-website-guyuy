@@ -40,6 +40,7 @@ export const ui = {
     weekdays: ["一", "二", "三", "四", "五", "六", "日"],
     credit: "设计灵感来自",
     navigation: "主导航",
+    latestProject: "最新项目",
   },
   en: {
     resume: "Resume",
@@ -85,5 +86,6 @@ export const ui = {
     weekdays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
     credit: "Design inspired by",
     navigation: "Main navigation",
+    latestProject: "Latest project",
   },
 };

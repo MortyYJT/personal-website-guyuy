@@ -517,14 +517,14 @@ p {
 }
 .bento {
   display: grid;
-  gap: 18px;
-  padding: 120px 0 48px;
-  grid-template-columns: 1fr;
+  gap: 14px;
+  padding: 92px 0 40px;
+  grid-template-columns: minmax(0, 1fr);
 }
 .card {
   position: relative;
-  border-radius: 26px;
-  padding: 22px;
+  border-radius: 22px;
+  padding: 16px 18px;
   background: var(--glass);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
@@ -553,27 +553,24 @@ p {
   margin: 0 0 10px;
 }
 .card-title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.4;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .avatar {
   display: block;
   border-radius: 50%;
   object-fit: cover;
 }
-.card-nav {
-  display: none;
-}
 .nav-card-brand {
   display: flex;
   align-items: center;
   gap: 12px;
   font-weight: 600;
-  font-size: 17px;
-  margin-bottom: 22px;
+  font-size: 15px;
+  margin-bottom: 14px;
 }
 .nav-card-links {
   list-style: none;
@@ -584,9 +581,9 @@ p {
 }
 .nav-card-links a {
   display: block;
-  padding: 8px 14px;
-  border-radius: 14px;
-  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
 }
 .nav-card-links a:hover {
   background: var(--hover);
@@ -594,7 +591,7 @@ p {
 .nav-card-toggles {
   display: flex;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: 14px;
 }
 .nav-card-toggles button {
   min-width: 44px;
@@ -612,20 +609,20 @@ p {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 36px 24px;
+  padding: 20px 18px;
 }
 .card-hi .avatar {
-  width: 128px;
-  height: 128px;
+  width: 92px;
+  height: 92px;
   box-shadow: 0 14px 30px -8px #145eab55;
   border: 3px solid var(--glass-border);
 }
 .hi-title {
   font-family: var(--font-display), -apple-system, "PingFang SC", sans-serif;
   font-weight: 400;
-  font-size: 24px;
-  line-height: 1.55;
-  margin: 20px 0 10px;
+  font-size: 19px;
+  line-height: 1.5;
+  margin: 12px 0 6px;
 }
 .hi-greeting,
 .hi-line {
@@ -633,15 +630,15 @@ p {
 }
 .hi-name {
   color: var(--accent);
-  font-size: 32px;
+  font-size: 25px;
 }
 .hi-intro {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
 }
 .card-art {
-  min-height: 150px;
+  min-height: 120px;
   display: grid;
   place-items: center;
   background:
@@ -657,8 +654,8 @@ p {
 }
 .art-fish {
   position: relative;
-  width: 76px;
-  height: 76px;
+  width: 58px;
+  height: 58px;
   color: var(--accent);
   transform: rotate(-12deg);
   animation: fish-float 4s ease-in-out infinite;
@@ -686,13 +683,13 @@ p {
   justify-content: center;
   gap: 6px;
   width: 100%;
-  padding: 16px 12px;
-  border-radius: 18px;
+  padding: 10px;
+  border-radius: 14px;
   background: var(--lcd-bg);
 }
 .lcd-digit {
-  width: 34px;
-  height: 60px;
+  width: 26px;
+  height: 46px;
 }
 .lcd-digit .on {
   fill: var(--accent);
@@ -715,15 +712,15 @@ p {
 }
 .calendar-title {
   color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 10px;
+  font-size: 12px;
+  margin-bottom: 6px;
 }
 .calendar-grid {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 2px;
+  border-spacing: 1px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--muted);
 }
 .calendar-grid th {
@@ -736,41 +733,44 @@ p {
   color: var(--accent);
 }
 .calendar-grid td {
-  height: 30px;
-  border-radius: 9px;
+  height: 26px;
+  border-radius: 8px;
 }
 .calendar-grid td[aria-current="date"] {
   background: var(--accent);
   color: var(--canvas);
   font-weight: 600;
 }
-.project-card-summary,
-.card-about .about-copy {
+.project-card-summary {
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.9;
-  margin-bottom: 14px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.card-project .tag-list {
-  margin-bottom: 16px;
+.card-project .text-link {
+  font-size: 12.5px;
 }
-.card-stack .tag-list li {
-  font-size: 12px;
-  padding: 3px 10px;
-  border-radius: 99px;
+.card-music {
+  padding: 8px 14px;
 }
 .music-facade {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 .music-note {
-  font-size: 26px;
+  font-size: 24px;
+  line-height: 1;
   color: var(--accent);
 }
 .music-meta {
   flex: 1;
   min-width: 0;
+  line-height: 1.45;
 }
 .music-title {
   font-size: 14px;
@@ -783,8 +783,8 @@ p {
   margin: 0;
 }
 .music-play {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -809,9 +809,9 @@ p {
 }
 .card-social {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
-  align-self: start;
+  padding: 10px 12px;
 }
 .social-button {
   flex: 1;
@@ -819,10 +819,10 @@ p {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
-  border-radius: 14px;
+  min-height: 36px;
+  border-radius: 12px;
   border: 1px solid var(--line);
-  font-size: 13px;
+  font-size: 12.5px;
 }
 .social-button:hover {
   background: var(--hover);
@@ -861,32 +861,35 @@ p {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "hi hi"
-      "project about"
-      "music clock"
-      "calendar art"
-      "stack social";
+      "project calendar"
+      "clock calendar"
+      "music art"
+      "social art";
   }
   .card-hi { grid-area: hi; }
   .card-project { grid-area: project; }
-  .card-about { grid-area: about; }
   .card-music { grid-area: music; }
   .card-clock { grid-area: clock; }
   .card-calendar { grid-area: calendar; }
   .card-art { grid-area: art; }
-  .card-stack { grid-area: stack; }
   .card-social { grid-area: social; }
 }
-@media (min-width: 1024px) {
+/* Wide screens: everything in one viewport, like the reference design. */
+@media (min-width: 900px) {
+  .shell-home main {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+  }
   .bento {
-    padding-top: 72px;
-    grid-template-columns: 250px minmax(0, 1fr) 300px;
+    padding: 24px 0 56px;
+    grid-template-columns: 230px 340px 280px;
+    grid-template-rows: 130px 140px 140px 58px;
     grid-template-areas:
       "nav art clock"
       "nav hi calendar"
       "project hi calendar"
-      "project hi music"
-      "project about social"
-      "stack about social";
+      "project music social";
   }
   .card-nav {
     display: block;
@@ -895,23 +898,35 @@ p {
   .shell-home .header-wrap {
     display: none;
   }
+  .shell-home .site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 0;
+    padding: 0 0 14px;
+    opacity: 0.8;
+  }
+  .card-music .music-sub {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+@media (max-width: 899px) {
+  .card-nav {
+    display: none;
+  }
 }
 @media (max-width: 599px) {
   .bento {
-    padding-top: 96px;
+    padding-top: 84px;
   }
   .hi-title {
-    font-size: 20px;
+    font-size: 18px;
   }
   .hi-name {
-    font-size: 26px;
-  }
-  .card {
-    padding: 18px;
-  }
-  .lcd-digit {
-    width: 28px;
-    height: 50px;
+    font-size: 23px;
   }
   .document-page,
   .not-found {
