@@ -20,7 +20,6 @@ export const profile: Profile = {
     zh: "一些项目，一段持续探索的过程。",
     en: "Selected projects. An ongoing exploration.",
   },
-  interests: [],
 };
 
 export const stack = [
@@ -36,10 +35,4 @@ export const stack = [
     label: { zh: "AI 与工具", en: "AI & tools" },
     items: ["LangChain", "Git", "GitHub"],
   },
-];
-
-export const phrases = [
-  { zh: "在探索 AI 的可能性。", en: "exploring what AI can do." },
-  { zh: "喜欢把想法做出来。", en: "turning ideas into projects." },
-  { zh: "一直在学习，也一直在做。", en: "learning by building." },
 ];

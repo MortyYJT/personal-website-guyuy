@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 export default function HomePage() {
   return (
-    <SiteShell>
+    <SiteShell home>
       <OpeningAnimation />
       <HomeContent />
     </SiteShell>
