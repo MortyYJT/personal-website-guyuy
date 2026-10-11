@@ -8,8 +8,8 @@ export const heroEyebrow: LocalizedText = {
 export const profile: Profile = {
   identity: "谷鱼Y",
   about: {
-    zh: "话多，精力旺盛，平时爱玩抽象，脑子里总会冒出一些莫名其妙的想法，有些后来真被我做成了项目。不写代码的时候喜欢到处旅游，也喜欢唱歌。欢迎来找我聊天，技术、旅行、游戏都行，想到什么聊什么。",
-    en: "I talk a lot, run on high energy, love absurd humour, and keep getting odd ideas, some of which have turned into actual projects. Away from code I like travelling and singing. Feel free to reach out about tech, travel, or games; I'm happy to chat about whatever comes to mind.",
+    zh: "话痨一枚，精力永远在线，日常爱玩抽象，脑子里时不时就蹦出些莫名其妙的点子。不敲代码的时候，不是在旅游的路上，就是在唱歌。想聊技术、旅行还是游戏，都欢迎来找我，保证不冷场！",
+    en: "Certified chatterbox with energy that never runs out. I love absurd humour, and random ideas pop into my head all the time. When I'm not coding, I'm either on the road or singing. Want to talk tech, travel, or games? Come say hi, I promise it won't get awkward!",
   },
   githubUrl: "https://github.com/MortyYJT",
   // Published at the owner's request (2026-10-11). Stored in parts and joined
