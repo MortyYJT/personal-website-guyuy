@@ -11,7 +11,7 @@
 
 ## 下一步
 
-- 文案还在和用户调：主页那句、档案标语、个人简介（`src/content/profile.ts`）。当前是第一版。
+- 文案已改为平实写法（用户不要口号、不要 AI 味，只写自己在做什么）。
 - 图片卡（`src/content/pictures.ts`）现在只有头像占位，等用户提供图片（横图更合适），放进 `public/pictures/` 再登记。
 - 部署脚本保留上一版静态资源（避免缓存的旧 HTML 找不到 CSS，见 `note/2026-10-11-site-polish.md`）：用户已同意，但改 `.github/workflows/pages.yml` 被自动模式拦下，需要用户放行或亲手改。
 
