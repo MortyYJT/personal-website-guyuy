@@ -3,7 +3,7 @@ import { siteOpenGraph } from "../../lib/site";
 import { SiteShell } from "../../components/site-shell";
 import { PicturesContent } from "../../components/pictures-content";
 export const metadata: Metadata = {
-  title: "Pictures / 图片",
+  title: "Gallery / 画廊",
   alternates: { canonical: "/pictures" },
   openGraph: { ...siteOpenGraph, url: "/pictures" },
 };

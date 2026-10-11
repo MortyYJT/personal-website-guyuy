@@ -14,13 +14,18 @@ export function PicturesContent() {
           ← {text.home}
         </Link>
         <h1>{text.picturesTitle}</h1>
-        <p>{text.picturesIntro}</p>
       </header>
       <div className="picture-grid">
         {pictures.map((picture) => (
           <figure className="picture-frame" key={picture.src}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={picture.src} alt={picture.alt[locale]} loading="lazy" />
+            <img
+              src={picture.src}
+              alt={picture.alt[locale]}
+              width={picture.width}
+              height={picture.height}
+              loading="lazy"
+            />
           </figure>
         ))}
       </div>

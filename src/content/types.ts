@@ -15,8 +15,8 @@ export type Project = {
 };
 export type Profile = {
   identity: "MortyYJT" | "谷鱼Y";
-  introduction: LocalizedText;
   about: LocalizedText;
   githubUrl: string;
+  emailParts: readonly [user: string, domain: string];
   resumeIntro: LocalizedText;
 };

@@ -7,15 +7,14 @@ export const heroEyebrow: LocalizedText = {
 
 export const profile: Profile = {
   identity: "谷鱼Y",
-  introduction: {
-    zh: "墨尔本大学计算机本科在读，做 AI agent 相关的项目。",
-    en: "Computer science undergraduate at the University of Melbourne, working on AI agent projects.",
-  },
   about: {
-    zh: "我是谷鱼Y（MortyYJT），墨尔本大学计算机本科在读，之前在莫纳什大学读了一年。现在主要做 AI agent 相关的项目：OfferPilot（留学申请 agent）和墨大课业 Agent（同步 Canvas 和 Ed 的作业并排进每周计划）。之前带队做过防诈骗 App SageSense，也用 Java 写过两个小游戏。",
-    en: "I'm MortyYJT (谷鱼Y), a computer science undergraduate at the University of Melbourne, after a year at Monash University. I mainly work on AI agent projects: OfferPilot (a study-abroad application agent) and the UniMelb Coursework Agent (syncing Canvas and Ed coursework into a weekly plan). Before that I led the anti-scam app SageSense and wrote two small games in Java.",
+    zh: "话痨一枚，精力永远在线，日常爱玩抽象，脑子里时不时就蹦出些莫名其妙的点子。不敲代码的时候，不是在旅游的路上，就是在唱歌。想聊技术、旅行还是游戏，都欢迎来找我，保证不冷场！",
+    en: "Certified chatterbox with energy that never runs out. I love absurd humour, and random ideas pop into my head all the time. When I'm not coding, I'm either on the road or singing. Want to talk tech, travel, or games? Come say hi, I promise it won't get awkward!",
   },
   githubUrl: "https://github.com/MortyYJT",
+  // Published at the owner's request (2026-10-11). Stored in parts and joined
+  // only on click, so the full address never appears in the page source.
+  emailParts: ["1360242321y", "gmail.com"],
   resumeIntro: {
     zh: "墨尔本大学 · 计算机科学",
     en: "The University of Melbourne · Computer Science",
