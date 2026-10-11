@@ -8,8 +8,8 @@ export const heroEyebrow: LocalizedText = {
 export const profile: Profile = {
   identity: "谷鱼Y",
   about: {
-    zh: "我是谷鱼Y（MortyYJT），墨尔本大学计算机本科在读，之前在莫纳什大学读了一年。现在主要做 AI agent 相关的项目：OfferPilot（留学申请 agent）和墨大课业 Agent（同步 Canvas 和 Ed 的作业并排进每周计划）。之前带队做过防诈骗 App SageSense，也用 Java 写过两个小游戏。",
-    en: "I'm MortyYJT (谷鱼Y), a computer science undergraduate at the University of Melbourne, after a year at Monash University. I mainly work on AI agent projects: OfferPilot (a study-abroad application agent) and the UniMelb Coursework Agent (syncing Canvas and Ed coursework into a weekly plan). Before that I led the anti-scam app SageSense and wrote two small games in Java.",
+    zh: "话多，精力旺盛，平时爱玩抽象，脑子里总会冒出一些莫名其妙的想法，有些后来真被我做成了项目。不写代码的时候喜欢到处旅游，也喜欢唱歌。欢迎来找我聊天，技术、旅行、游戏都行，想到什么聊什么。",
+    en: "I talk a lot, run on high energy, love absurd humour, and keep getting odd ideas, some of which have turned into actual projects. Away from code I like travelling and singing. Feel free to reach out about tech, travel, or games; I'm happy to chat about whatever comes to mind.",
   },
   githubUrl: "https://github.com/MortyYJT",
   // Published at the owner's request (2026-10-11). Stored in parts and joined
