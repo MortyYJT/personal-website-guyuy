@@ -12,8 +12,8 @@ export const profile: Profile = {
     en: "Computer science undergraduate at the University of Melbourne, working on AI agent projects.",
   },
   about: {
-    zh: "我是谷鱼Y（MortyYJT），墨尔本大学计算机本科在读，之前在莫纳什大学读了一年。现在主要做 AI agent 相关的项目：OfferPilot（澳洲硕士申请规划）和墨大课业 Agent（同步 Canvas 和 Ed 的作业并排进每周计划）。之前带队做过防诈骗 App SageSense，也用 Java 写过两个小游戏。",
-    en: "I'm MortyYJT (谷鱼Y), a computer science undergraduate at the University of Melbourne, after a year at Monash University. I mainly work on AI agent projects: OfferPilot (planning Australian master's applications) and the UniMelb Coursework Agent (syncing Canvas and Ed coursework into a weekly plan). Before that I led the anti-scam app SageSense and wrote two small games in Java.",
+    zh: "我是谷鱼Y（MortyYJT），墨尔本大学计算机本科在读，之前在莫纳什大学读了一年。现在主要做 AI agent 相关的项目：OfferPilot（留学申请 agent）和墨大课业 Agent（同步 Canvas 和 Ed 的作业并排进每周计划）。之前带队做过防诈骗 App SageSense，也用 Java 写过两个小游戏。",
+    en: "I'm MortyYJT (谷鱼Y), a computer science undergraduate at the University of Melbourne, after a year at Monash University. I mainly work on AI agent projects: OfferPilot (a study-abroad application agent) and the UniMelb Coursework Agent (syncing Canvas and Ed coursework into a weekly plan). Before that I led the anti-scam app SageSense and wrote two small games in Java.",
   },
   githubUrl: "https://github.com/MortyYJT",
   resumeIntro: {
