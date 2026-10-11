@@ -14,7 +14,6 @@ export function PicturesContent() {
           ← {text.home}
         </Link>
         <h1>{text.picturesTitle}</h1>
-        <p>{text.picturesIntro}</p>
       </header>
       <div className="picture-grid">
         {pictures.map((picture) => (

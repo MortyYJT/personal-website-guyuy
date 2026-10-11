@@ -1,5 +1,4 @@
 "use client";
-import { profile } from "../../../content/profile";
 import { ui } from "../../../content/ui";
 import { useNow } from "../../../hooks/use-now";
 import { greetingFor } from "../../../lib/greeting";
@@ -24,7 +23,6 @@ export function HiCard() {
           {text.niceToMeet}
         </span>
       </h1>
-      <p className="hi-intro">{profile.introduction[locale]}</p>
     </Card>
   );
 }
