@@ -5,17 +5,15 @@
 ## 当前状态
 
 - 线上主站：https://mortyyjt.github.io/ （GitHub Pages，main 每次更新后由 `.github/workflows/pages.yml` 自动发布）；Vercel 是镜像。
-- PR #6 已合并（merge commit，Pages 部署成功，线上 /profile 已确认有经历、游戏、音乐）。main 上现有：毛玻璃首页、hello 开屏、点赞爱心（目前仅本地计数）、小档案（个人简介、经历、项目、技术栈、游戏、音乐、联系）、项目页 5 个项目（含 SageSense：用户是总负责人、写了几乎全部代码；Garbage Collection Inc 的控制台引擎由课程提供，只简短提一句）、友链页、跨页面播放器。深色模式已改为纯黑极简（中性近黑底，无光晕、无颗粒，见 `note/2026-10-11-dark-plain.md`），不再是「夜雨青」。
+- PR #6 已合并（merge commit，Pages 部署成功，线上 /profile 已确认有经历、游戏、音乐）。main 上现有：毛玻璃首页、hello 开屏、图片卡（点开是 /pictures 图库）、小档案（个人简介、经历、项目、技术栈、游戏带图标、音乐链到网易云、联系）、项目页 6 个项目（含墨大课业 Agent；SageSense 是用户总负责、写了几乎全部代码；Garbage Collection Inc 的控制台引擎由课程提供，只简短提一句）、友链页（3 个）、仿参考站外壳的跨页面播放器。点赞功能已按用户要求整个删除（含 Worker 代码）。深色模式已改为纯黑极简（中性近黑底，无光晕、无颗粒，见 `note/2026-10-11-dark-plain.md`），不再是「夜雨青」。
 - 用户要求本项目尽量在同一个会话窗口里完成，不主动开新会话；只有上下文真的快满时才按规则交接。
 - AGENTS.md 已加 Session hygiene 规则：上下文快满或进入新阶段时，主动更新本文件、提交、开新会话并归档旧会话，只用一行告诉用户。
 
 ## 下一步
 
-- 暂无进行中的任务，等用户下一个需求。
-
-## 待办（暂缓，用户有空再做）
-
-- **点赞后端部署**（需要用户的 Cloudflare 账号）：用户运行 `npx wrangler login`、`npx wrangler kv namespace create LIKES`、`npx wrangler secret put IP_SALT`，把 KV id 给 Claude。之后填进 `workers/likes/wrangler.toml` 执行 `npx wrangler deploy`，再设置 GitHub 仓库变量 `LIKES_ENDPOINT` 和 Vercel 环境变量 `NEXT_PUBLIC_LIKES_ENDPOINT`，触发一次部署后实测。
+- 文案还在和用户调：主页那句、档案标语、个人简介（`src/content/profile.ts`）。当前是第一版。
+- 图片卡（`src/content/pictures.ts`）现在只有头像占位，等用户提供图片（横图更合适），放进 `public/pictures/` 再登记。
+- 部署脚本保留上一版静态资源（避免缓存的旧 HTML 找不到 CSS，见 `note/2026-10-11-site-polish.md`）：用户已同意，但改 `.github/workflows/pages.yml` 被自动模式拦下，需要用户放行或亲手改。
 
 ## 约定（不要违反）
 

@@ -10,6 +10,7 @@ import {
 import { projects } from "../content/projects";
 import { ui } from "../content/ui";
 import { getPublishableProjects } from "../lib/content";
+import { neteaseSongUrl } from "../lib/music";
 import { usePreferences } from "./preferences-provider";
 import { SproutMark } from "./sprout-mark";
 import { ProjectEntry } from "./project-entry";
@@ -43,12 +44,10 @@ export function ProfileContent() {
         <h2>{text.education}</h2>
         <ol className="timeline">
           {education.map((entry) => (
-            <li className="stack-row" key={entry.period}>
-              <h3>{entry.period}</h3>
-              <div>
-                <strong>{entry.school[locale]}</strong>
-                <p>{entry.detail[locale]}</p>
-              </div>
+            <li key={entry.period}>
+              <span className="timeline-period">{entry.period}</span>
+              <strong>{entry.school[locale]}</strong>
+              <span className="timeline-detail">{entry.detail[locale]}</span>
             </li>
           ))}
         </ol>
@@ -80,9 +79,14 @@ export function ProfileContent() {
       </section>
       <section className="document-section">
         <h2>{text.games}</h2>
-        <ul className="stack-tags">
+        <ul className="game-list">
           {favouriteGames.map((game) => (
-            <li key={game.en}>{game[locale]}</li>
+            <li key={game.name.en}>
+              {/* Static export: next/image optimisation is unavailable. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={game.icon} alt="" width={28} height={28} loading="lazy" />
+              {game.name[locale]}
+            </li>
           ))}
         </ul>
       </section>
@@ -91,7 +95,14 @@ export function ProfileContent() {
         <ul className="music-list">
           {favouriteMusic.map((song) => (
             <li key={song.title}>
-              <span>{song.title}</span>
+              <a
+                className="text-link"
+                href={neteaseSongUrl(song.neteaseId) ?? undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {song.title} ↗
+              </a>
               <span>{song.artist}</span>
             </li>
           ))}

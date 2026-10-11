@@ -579,51 +579,43 @@ p {
 }
 .card-art {
   min-height: 120px;
-  display: grid;
-  place-items: center;
-  background:
-    linear-gradient(170deg, #cfe8c855, transparent 70%), var(--glass);
+  padding: 8px;
 }
-.art-rain {
-  position: absolute;
-  inset: 0;
+.art-link {
+  display: block;
+  height: 100%;
+  border-radius: 16px;
   overflow: hidden;
 }
-.art-rain span {
-  position: absolute;
-  top: -20%;
-  left: var(--x);
-  width: 2px;
-  height: 14px;
-  border-radius: 2px;
-  background: linear-gradient(transparent, var(--accent));
-  opacity: 0.45;
-  animation: rain-fall var(--speed) linear var(--delay) infinite;
+.art-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  display: block;
+  transition: transform 0.4s ease;
 }
-@keyframes rain-fall {
-  to {
-    transform: translateY(170px);
-  }
+.art-link:hover img {
+  transform: scale(1.04);
 }
-.art-sprout {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  color: var(--accent);
-  transform-origin: 50% 100%;
-  animation: sprout-sway 5s ease-in-out infinite;
+.picture-grid {
+  columns: 3 260px;
+  column-gap: 16px;
 }
-@keyframes sprout-sway {
-  50% {
-    transform: rotate(4deg);
-  }
+.picture-frame {
+  break-inside: avoid;
+  margin: 0 0 16px;
+  padding: 8px;
+  border-radius: 22px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
-.art-caption {
-  position: relative;
-  margin: 6px 0 0;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  color: var(--subtle);
+.picture-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
 }
 .card-clock {
   display: grid;
@@ -709,23 +701,7 @@ p {
 }
 .card-music {
   padding: 8px 14px;
-}
-.music-facade {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.music-note {
-  font-size: 24px;
-  line-height: 1;
-  color: var(--accent);
-}
-.music-embed {
-  flex: 1;
-  min-width: 0;
-  height: 42px;
-  border: 0;
-  border-radius: 10px;
+  min-height: 64px;
 }
 .card-social {
   display: flex;
@@ -757,53 +733,6 @@ p {
   background: #eef4f1;
   color: #1f2328;
 }
-.like-button {
-  position: relative;
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  color: #f08ca0;
-}
-.like-button svg {
-  width: 22px;
-  height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  transition: fill 0.2s;
-}
-.like-button.is-liked svg {
-  fill: currentColor;
-}
-.like-button.is-liked {
-  cursor: default;
-}
-.like-button.is-popping svg {
-  animation: heart-pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
-}
-@keyframes heart-pop {
-  40% {
-    transform: scale(1.35);
-  }
-}
-.like-count {
-  position: absolute;
-  top: -10px;
-  right: -14px;
-  min-width: 24px;
-  padding: 1px 7px;
-  border-radius: 99px;
-  background: var(--pill);
-  border: 1px solid var(--glass-border);
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.6;
-}
 .social-icon svg {
   width: 24px;
   height: 24px;
@@ -816,41 +745,113 @@ p {
 
 
 .player-slot {
-  flex: 1;
-  min-width: 0;
-  height: 42px;
+  height: 48px;
 }
 /* Positioned over the home music card, or docked in the corner elsewhere. */
 .persistent-player {
   position: absolute;
   z-index: 6;
-  height: 42px;
-  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 4px 0 6px;
 }
 .persistent-player:not(.is-docked) {
   /* Appear right after the music card (order 8) settles. */
   animation: card-in 0.6s ease-out 760ms both;
 }
-.persistent-player .music-embed {
-  width: 100%;
-  pointer-events: auto;
-}
 .persistent-player.is-docked {
   position: fixed;
   right: max(16px, env(safe-area-inset-right));
   bottom: calc(16px + env(safe-area-inset-bottom));
-  width: min(320px, calc(100vw - 32px));
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 20px;
+  width: min(300px, calc(100vw - 32px));
+  height: 64px;
+  padding: 0 12px 0 16px;
+  border-radius: 22px;
   background: var(--pill);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  pointer-events: auto;
+}
+/* Kept mounted (and playable) but out of sight while nothing is under way. */
+.persistent-player.is-hidden {
+  visibility: hidden;
+}
+.music-note {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.music-meta {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+}
+.music-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.2;
+}
+.music-progress {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--tag);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.music-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 0.5s linear;
+}
+/* Bandcamp's own 40px play button, clipped and laid under the visible face. */
+.music-button {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--canvas);
+  box-shadow: 0 2px 10px #0000001a;
+}
+.music-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 42px;
+  border: 0;
+  opacity: 0.011;
+}
+.music-button-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: var(--accent);
+}
+.music-button-face svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.music-button:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Route changes: page content rises in each time a page mounts. */
@@ -920,18 +921,61 @@ p {
   gap: 8px 18px;
   font-size: 14px;
 }
-/* Education timeline and music list on the profile page. */
+/* Education timeline, games, and music list on the profile page. */
 .timeline {
   padding: 0;
   margin: 0;
   list-style: none;
 }
+.timeline li {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 4px 16px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.timeline-period {
+  color: var(--subtle);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
 .timeline strong {
   font-weight: 500;
   font-size: 15px;
 }
-.timeline p {
-  margin: 4px 0 0;
+.timeline-detail {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: right;
+}
+.game-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px 18px;
+  font-size: 14px;
+}
+.game-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.game-list img {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  flex: none;
+}
+@media (max-width: 520px) {
+  .timeline li {
+    grid-template-columns: 1fr auto;
+  }
+  .timeline-period {
+    grid-column: 1 / -1;
+  }
 }
 .music-list {
   padding: 0;
@@ -1175,10 +1219,6 @@ a.gallery-card:hover {
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
-  }
-  /* Show still drops instead of hiding them above the card. */
-  .art-rain span {
-    top: var(--still);
   }
 }
 
