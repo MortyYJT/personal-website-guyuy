@@ -22,7 +22,7 @@ npm start
 | --- | --- |
 | `npm run lint` | Next.js and TypeScript ESLint checks |
 | `npm run typecheck` | Strict application checking |
-| `npm test` | Unit tests for site logic and the like-counter Worker |
+| `npm test` | Unit tests for site logic |
 | `npm run build` | Production build and static route generation |
 
 The configuration retains strict application checking and the framework-recommended `skipLibCheck` for dependency/generated declarations. Next.js emits duplicate global route declarations in development and production output; checking both declaration trees together fails independently of application code.
@@ -31,14 +31,14 @@ The toolchain pins TypeScript 6 because the current ESLint parser does not suppo
 
 ## Content and routes
 
-- `/`: card grid (nav, greeting, clock, calendar, latest project, music, GitHub and like).
+- `/`: card grid (nav, greeting, clock, calendar, latest project, music, GitHub).
 - `/profile`: public profile, selected work and stack.
 - `/projects`: project cards with links to the implementation evidence.
 - `/friends`: sites of people the owner follows on GitHub.
 
 Edit `src/content/` (`profile.ts`, `projects.ts`, `friends.ts`, `nav.ts`, `site.ts`, `ui.ts`). Every visible project requires bilingual copy, a public GitHub repository and implementation evidence. Use only **MortyYJT / 谷鱼Y** as the owner's identity.
 
-The music player (Toby Fox's official Bandcamp embed) lives in the root layout so it keeps playing across pages. The like counter is a Cloudflare Worker in `workers/likes/` (deploy steps there); without `NEXT_PUBLIC_LIKES_ENDPOINT` the heart works locally only.
+The music player (Toby Fox's official Bandcamp embed) lives in the root layout so it keeps playing across pages.
 
 ## Deployment
 
@@ -48,7 +48,7 @@ Chinese and the light theme are the defaults. Explicit choices persist under `gu
 
 ## Deployment
 
-The site itself needs no database, authentication or API keys. The only build-time variable is the optional `NEXT_PUBLIC_LIKES_ENDPOINT`. On Vercel, select **Next.js**, repository root, Node.js 24, and the default build settings.
+The site itself needs no database, authentication or API keys. On Vercel, select **Next.js**, repository root, Node.js 24, and the default build settings.
 
 Repository: [MortyYJT/personal-website-guyuy](https://github.com/MortyYJT/personal-website-guyuy). Production: [mortyyjt.github.io](https://mortyyjt.github.io/); mirror: [personal-website-guyuy.vercel.app](https://personal-website-guyuy.vercel.app). Canonical, Open Graph, robots and sitemap URLs use the origin in `src/lib/site.ts`; update it when moving to a custom domain. CI runs lint, types, tests, the default build and the static export on every push and pull request.
 

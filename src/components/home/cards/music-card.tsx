@@ -5,12 +5,7 @@ import { Card } from "./card";
 export function MusicCard() {
   return (
     <Card area="music" order={8}>
-      <div className="music-facade">
-        <span className="music-note" aria-hidden="true">
-          ♪
-        </span>
-        <div className="player-slot" data-player-slot />
-      </div>
+      <div className="player-slot" data-player-slot />
     </Card>
   );
 }
