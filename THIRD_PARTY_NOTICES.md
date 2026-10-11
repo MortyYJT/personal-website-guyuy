@@ -26,3 +26,11 @@ project is distributed under the MIT License, Copyright (c) 2025 YYsuni.
   (from the Steam store). They only identify games the owner plays. The games, names, and icons
   are trademarks of their respective owners (COGNOSPHERE/HoYoverse, Gaijin Entertainment,
   Electronic Arts/Respawn, and Valve).
+
+## Gallery
+
+- Photos in `public/pictures/` were taken and supplied by the owner; all metadata, including GPS
+  location, was stripped on conversion to WebP.
+- `featured.webp` is Zenless Zone Zero artwork © COGNOSPHERE/HoYoverse, and `wallpaper.webp` is a
+  third-party wallpaper supplied by the owner. Both are shown for non-commercial, personal display
+  and will be removed on request from the rights holder.

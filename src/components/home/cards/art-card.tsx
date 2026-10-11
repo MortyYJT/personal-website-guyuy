@@ -14,7 +14,7 @@ export function ArtCard() {
       <Link className="art-link" href="/pictures" aria-label={ui[locale].picturesTitle}>
         {/* Static export: next/image optimisation is unavailable. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={featured.src} alt={featured.alt[locale]} />
+        <img src={featured.src} alt={featured.alt[locale]} width={featured.width} height={featured.height} />
       </Link>
     </Card>
   );
