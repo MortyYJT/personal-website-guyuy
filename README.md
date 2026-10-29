@@ -42,7 +42,7 @@ The music player (Toby Fox's official Bandcamp embed) lives in the root layout s
 
 ## Deployment
 
-Pushes to `main` build a static export (`STATIC_EXPORT=1`) and rsync it to `/srv/mortyyjt.site` on the owner's server (`.github/workflows/deploy.yml`). The repository secret `SITE_DEPLOY_KEY` is an SSH key that the server confines with rrsync to that directory; it cannot open a shell. The Caddy that serves the directory also fronts LeapAshore, so its site block lives in `MortyYJT/LeapAshore` (`deploy/Caddyfile`). Old hashed assets are kept on each deploy so visitors with a cached page still load its styles. Vercel builds the same code as a mirror.
+Pushes to `main` build a static export (`STATIC_EXPORT=1`) and rsync it to `/srv/mortyyjt.site` on the owner's server (`.github/workflows/deploy.yml`). The repository secret `SITE_DEPLOY_KEY` is an SSH key that the server confines with rrsync to that directory; it cannot open a shell. The Caddy that serves the directory also fronts LeapAshore, so its site block lives in `MortyYJT/LeapAshore` (`deploy/Caddyfile`). Old hashed assets are kept on each deploy so visitors with a cached page still load its styles. The same workflow also force-pushes the export to `MortyYJT/MortyYJT.github.io` (secret `PAGES_DEPLOY_KEY`), kept as a mirror at https://mortyyjt.github.io/; canonical URLs point at mortyyjt.site. Vercel builds the same code as another mirror.
 
 Chinese and the light theme are the defaults. Explicit choices persist under `guyuy:preferences:v1` in local browser storage across routes and reloads. If storage is denied, controls continue working in memory; a fresh load uses the defaults. Reduced motion skips the opening animation, card entrances and theme transition.
 

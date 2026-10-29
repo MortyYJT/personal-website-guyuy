@@ -1,7 +1,10 @@
-name: Deploy to the server
-# Builds a static export of main and rsyncs it to the owner's server, where the Caddy that also
-# fronts LeapAshore serves /srv/mortyyjt.site at https://mortyyjt.site/. The Caddy site block lives
-# in MortyYJT/LeapAshore (deploy/Caddyfile) because that Caddy holds ports 80 and 443.
+name: Deploy
+# Builds a static export of main and publishes it twice:
+# - rsync to the owner's server, where the Caddy that also fronts LeapAshore serves
+#   /srv/mortyyjt.site at https://mortyyjt.site/ (the site block lives in MortyYJT/LeapAshore,
+#   deploy/Caddyfile, because that Caddy holds ports 80 and 443);
+# - a force-push to MortyYJT/MortyYJT.github.io, kept as a mirror at https://mortyyjt.github.io/.
+#   Canonical URLs point at mortyyjt.site, so search engines treat the mirror as a copy.
 on:
   push:
     branches: [main]
@@ -44,3 +47,20 @@ jobs:
             --filter='P /_next/static/**' \
             -e "ssh -i ~/.ssh/site_key -o IdentitiesOnly=yes" \
             out/ ubuntu@43.161.224.82:/
+      - name: Push the export to the Pages mirror
+        env:
+          DEPLOY_KEY: ${{ secrets.PAGES_DEPLOY_KEY }}
+        run: |
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/pages_key
+          chmod 600 ~/.ssh/pages_key
+          # GitHub's published host key (from `gh api meta`), pinned instead of trusted on first use.
+          echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' >> ~/.ssh/known_hosts
+          touch out/.nojekyll
+          cd out
+          git init -q -b main
+          git config user.name MortyYJT
+          git config user.email 213947413+MortyYJT@users.noreply.github.com
+          git add -A
+          git commit -q -m "deploy: ${GITHUB_SHA}"
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/pages_key -o IdentitiesOnly=yes" \
+            git push --force git@github.com:MortyYJT/MortyYJT.github.io.git main
