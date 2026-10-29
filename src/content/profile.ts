@@ -24,11 +24,11 @@ export const profile: Profile = {
 export const stack = [
   {
     label: { zh: "Agent 与 AI", en: "Agents & AI" },
-    items: ["Tool calling", "RAG with citations", "OpenAI-compatible APIs", "DeepSeek", "Claude Code", "Codex", "OpenSpec"],
+    items: ["Tool calling", "LangGraph", "RAG with citations", "OpenAI-compatible APIs", "DeepSeek", "Claude Code", "Codex", "OpenSpec"],
   },
   {
     label: { zh: "界面", en: "Interfaces" },
-    items: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Jetpack Compose"],
+    items: ["TypeScript", "React", "Next.js", "Vite", "Tailwind CSS", "Jetpack Compose"],
   },
   {
     label: { zh: "服务端与数据", en: "Backend & data" },
