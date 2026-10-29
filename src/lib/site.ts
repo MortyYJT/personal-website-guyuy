@@ -1,4 +1,4 @@
-export const siteOrigin = "https://mortyyjt.github.io";
+export const siteOrigin = "https://mortyyjt.site";
 
 export const siteOpenGraph = {
   title: "谷鱼Y · MortyYJT",

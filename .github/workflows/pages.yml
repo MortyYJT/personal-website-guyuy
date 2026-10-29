@@ -1,6 +1,6 @@
 name: Deploy to GitHub Pages
 # Builds a static export of main and force-pushes it to MortyYJT/MortyYJT.github.io,
-# which GitHub Pages serves at https://mortyyjt.github.io/. Vercel stays as a mirror.
+# which GitHub Pages serves at https://mortyyjt.site/ (custom domain from public/CNAME). Vercel stays as a mirror.
 on:
   push:
     branches: [main]

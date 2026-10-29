@@ -1,6 +1,6 @@
 # personal-website-guyuy
 
-A personal website for **MortyYJT / 谷鱼Y**. Built with Next.js App Router, React, strict TypeScript, and Tailwind CSS. Live at https://mortyyjt.github.io/ (GitHub Pages; Vercel mirror). The home page is a one-screen grid of frosted-glass cards inspired by [YYsuni/2025-blog-public](https://github.com/YYsuni/2025-blog-public) and [lvyovo-wiki.tech](https://lvyovo-wiki.tech/); no code or assets were copied (see `THIRD_PARTY_NOTICES.md`).
+A personal website for **MortyYJT / 谷鱼Y**. Built with Next.js App Router, React, strict TypeScript, and Tailwind CSS. Live at https://mortyyjt.site/ (GitHub Pages custom domain; Vercel mirror). The home page is a one-screen grid of frosted-glass cards inspired by [YYsuni/2025-blog-public](https://github.com/YYsuni/2025-blog-public) and [lvyovo-wiki.tech](https://lvyovo-wiki.tech/); no code or assets were copied (see `THIRD_PARTY_NOTICES.md`).
 
 ## Development
 
@@ -42,7 +42,7 @@ The music player (Toby Fox's official Bandcamp embed) lives in the root layout s
 
 ## Deployment
 
-Pushes to `main` build a static export (`STATIC_EXPORT=1`) and publish it to `MortyYJT/MortyYJT.github.io` (`.github/workflows/pages.yml`). Vercel builds the same code as a mirror.
+Pushes to `main` build a static export (`STATIC_EXPORT=1`) and publish it to `MortyYJT/MortyYJT.github.io` (`.github/workflows/pages.yml`). The deploy force-pushes the export, so the custom domain must live in `public/CNAME`; a domain set only in the Pages settings is erased by the next deploy. Vercel builds the same code as a mirror.
 
 Chinese and the light theme are the defaults. Explicit choices persist under `guyuy:preferences:v1` in local browser storage across routes and reloads. If storage is denied, controls continue working in memory; a fresh load uses the defaults. Reduced motion skips the opening animation, card entrances and theme transition.
 
@@ -50,6 +50,6 @@ Chinese and the light theme are the defaults. Explicit choices persist under `gu
 
 The site itself needs no database, authentication or API keys. On Vercel, select **Next.js**, repository root, Node.js 24, and the default build settings.
 
-Repository: [MortyYJT/personal-website-guyuy](https://github.com/MortyYJT/personal-website-guyuy). Production: [mortyyjt.github.io](https://mortyyjt.github.io/); mirror: [personal-website-guyuy.vercel.app](https://personal-website-guyuy.vercel.app). Canonical, Open Graph, robots and sitemap URLs use the origin in `src/lib/site.ts`; update it when moving to a custom domain. CI runs lint, types, tests, the default build and the static export on every push and pull request.
+Repository: [MortyYJT/personal-website-guyuy](https://github.com/MortyYJT/personal-website-guyuy). Production: [mortyyjt.site](https://mortyyjt.site/) (`public/CNAME`; `mortyyjt.github.io` redirects there); mirror: [personal-website-guyuy.vercel.app](https://personal-website-guyuy.vercel.app). Canonical, Open Graph, robots and sitemap URLs use the origin in `src/lib/site.ts`; keep it in step with `public/CNAME`. CI runs lint, types, tests, the default build and the static export on every push and pull request.
 
 Local acceptance and remaining remote checks are recorded in `note/2026-10-08-implementation.md`. Agent instructions are indexed in `AGENTS.md`; detailed guidance is in `docs/engineering/agent-guidelines.md`.

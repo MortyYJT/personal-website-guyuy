@@ -1,4 +1,4 @@
-# 交接（2026-10-11，阶段完成）
+# 交接（2026-10-29 更新）
 
 新会话先读这个文件，再对照 `git status` / `git log` 核实。用户说本阶段已完成，项目暂停；下次有新需求再继续。
 
@@ -11,11 +11,16 @@
 - 友链 3 个：不想上学、MarkChu、Emulisy。画廊 14 张图（`public/pictures/`，WebP，元数据含 GPS 已去除）。
 - 深色模式：纯黑极简（`#101211`，无光晕、无颗粒）。点赞功能已整个删除。
 
+## 2026-10-29 更新
+
+- PR #13 已合并上线：OfferPilot 改名 LeapAshore（鱼跃彼岸），墨大课业 Agent 改名 StudyOrbit（v2 原型），项目页链接和介绍按两个仓库当前 README 重写；技术栈加 LangGraph、Vite。
+- 自定义域名 `mortyyjt.site`：分支 `codex/custom-domain` 的 PR 已开但**未合并**，等用户在 DNSPod 加好记录。步骤和检查见 `note/2026-10-29-custom-domain.md`。
+- 本机环境变量带 `NODE_ENV=development` 和 `NODE_DEBUG`，`next build` 会报 `/_global-error` 的 useContext 错；构建时用 `env -u NODE_ENV -u NODE_DEBUG`。
+
 ## 待办（都不急，用户有需要再做）
 
 - 部署时保留上一版静态资源：部署后 10 分钟内，用旧缓存 HTML 的访客会加载不到已删除的旧 CSS，页面没样式（强制刷新可恢复）。方案见 `note/2026-10-11-site-polish.md`；改 `pages.yml` 被自动模式拦下，用户表示「无所谓」，暂不做。
-- 墨大课业 Agent 用户说这两天就做完：完成后更新项目页的状态和介绍。
-- OfferPilot 仓库的 README 和简介还写「澳洲八大」，网站已改成全球；仓库那边由用户决定是否改。
+- LeapAshore 仓库的 GitHub 简介（About）还写「Group of Eight」、主页链接是 Vercel，而 README 已是 QS 前 300 和自部署 demo；由用户决定是否改。
 - Steam 三款游戏图标只有 32px，高分屏略糊；以后有更清晰的官方来源可以替换。
 
 ## 约定（不要违反）
