@@ -1,0 +1,46 @@
+name: Deploy to the server
+# Builds a static export of main and rsyncs it to the owner's server, where the Caddy that also
+# fronts LeapAshore serves /srv/mortyyjt.site at https://mortyyjt.site/. The Caddy site block lives
+# in MortyYJT/LeapAshore (deploy/Caddyfile) because that Caddy holds ports 80 and 443.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+        env:
+          STATIC_EXPORT: "1"
+          NEXT_TELEMETRY_DISABLED: 1
+      - name: Upload the export
+        env:
+          DEPLOY_KEY: ${{ secrets.SITE_DEPLOY_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/site_key
+          chmod 600 ~/.ssh/site_key
+          # The server's host key, pinned instead of trusted on first use.
+          echo '43.161.224.82 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPKbzBXsAcPGNv/E2VbXleXLwINIpTLzXFunG+hysZTB' >> ~/.ssh/known_hosts
+          # The server-side key runs rrsync confined to /srv/mortyyjt.site, so "/" is that directory.
+          # --delay-updates swaps files in at the end, so a visitor never gets new HTML before its assets.
+          # Old hashed assets are protected from --delete: a visitor holding a cached page from the
+          # previous build can still load its CSS and JS.
+          rsync -rlt --checksum --delete --delay-updates \
+            --filter='P /_next/static/**' \
+            -e "ssh -i ~/.ssh/site_key -o IdentitiesOnly=yes" \
+            out/ ubuntu@43.161.224.82:/

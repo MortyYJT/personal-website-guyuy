@@ -1,21 +1,26 @@
-# 交接（2026-10-11，阶段完成）
+# 交接（2026-10-29 更新）
 
 新会话先读这个文件，再对照 `git status` / `git log` 核实。用户说本阶段已完成，项目暂停；下次有新需求再继续。
 
 ## 当前状态（main，已上线）
 
-- 线上主站：https://mortyyjt.github.io/ （GitHub Pages，main 每次更新后由 `.github/workflows/pages.yml` 自动发布）；Vercel 是镜像。最后合并的是 PR #11。
+- 线上主站：https://mortyyjt.site/ （自己的服务器，main 每次更新后由 `.github/workflows/deploy.yml` 自动部署）；Vercel 是镜像。
 - 首页：毛玻璃卡片、hello 开屏、问候卡（只有问候和名字）、图片卡（绝区零插画，点开是 `/pictures` 画廊）、时钟、日历、最新项目、仿参考站外壳的播放器、GitHub 和「复制邮箱」按钮（点击复制并在底部提示）。
 - 小档案：个人简介（讲性格，活泼语气）、经历（墨大 2026.07–2028.06、莫纳什 2025.07–2026.06，计算机，一行一条，新的在上）、项目、技术栈（按仓库实际依赖，突出 Agent）、6 个游戏带官方图标、5 首歌链到网易云、联系。
 - 项目页 6 个：OfferPilot（留学申请 agent，面向全球）、墨大课业 Agent（进行中）、这个网站、SageSense（用户总负责、写了几乎全部代码）、Garbage Collection Inc（控制台引擎由课程提供）、Bullet Bloom。
 - 友链 3 个：不想上学、MarkChu、Emulisy。画廊 14 张图（`public/pictures/`，WebP，元数据含 GPS 已去除）。
 - 深色模式：纯黑极简（`#101211`，无光晕、无颗粒）。点赞功能已整个删除。
 
+## 2026-10-29 更新
+
+- PR #13 已合并：OfferPilot 改名 LeapAshore（鱼跃彼岸），墨大课业 Agent 改名 StudyOrbit，项目页按两个仓库当前 README 重写；技术栈加 LangGraph、Vite。
+- **网站搬到自己的服务器**，域名 `mortyyjt.site`，不再用 GitHub Pages。怎么搭的、钥匙权限、上线顺序见 `note/2026-10-29-self-host.md`。PR #14（Pages + CNAME 方案）已关闭。
+- 本机环境变量带 `NODE_ENV=development` 和 `NODE_DEBUG`，`next build` 会报 `/_global-error` 的 useContext 错；构建时用 `env -u NODE_ENV -u NODE_DEBUG`。本机 rsync 是 macOS 的 openrsync，过不了服务器的 rrsync，测试部署要用 Linux 容器里的标准 rsync。
+
 ## 待办（都不急，用户有需要再做）
 
-- 部署时保留上一版静态资源：部署后 10 分钟内，用旧缓存 HTML 的访客会加载不到已删除的旧 CSS，页面没样式（强制刷新可恢复）。方案见 `note/2026-10-11-site-polish.md`；改 `pages.yml` 被自动模式拦下，用户表示「无所谓」，暂不做。
-- 墨大课业 Agent 用户说这两天就做完：完成后更新项目页的状态和介绍。
-- OfferPilot 仓库的 README 和简介还写「澳洲八大」，网站已改成全球；仓库那边由用户决定是否改。
+- `MortyYJT.github.io` 仓库还在发布最后一版旧网站：删除仓库，还是改成跳转到 `mortyyjt.site`，由用户决定。
+- LeapAshore 仓库的 GitHub 简介（About）还写「Group of Eight」，由用户决定是否改。
 - Steam 三款游戏图标只有 32px，高分屏略糊；以后有更清晰的官方来源可以替换。
 
 ## 约定（不要违反）

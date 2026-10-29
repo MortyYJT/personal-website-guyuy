@@ -39,8 +39,8 @@ export const projects: readonly Project[] = [
     id: "personal-website",
     title: { zh: "这个网站", en: "This website" },
     summary: {
-      zh: "你正在看的个人网站：Next.js 静态导出后部署到 GitHub Pages，毛玻璃卡片首页、跨页面不中断的音乐播放器、视图过渡的主题切换。",
-      en: "The site you are reading: a Next.js static export on GitHub Pages with a glass-card home, a music player that keeps playing across pages, and View Transition theme switching.",
+      zh: "你正在看的个人网站：Next.js 静态导出后由 GitHub Actions 同步到自己的服务器，毛玻璃卡片首页、跨页面不中断的音乐播放器、视图过渡的主题切换。",
+      en: "The site you are reading: a Next.js static export that GitHub Actions syncs to my own server, with a glass-card home, a music player that keeps playing across pages, and View Transition theme switching.",
     },
     technologies: ["Next.js", "TypeScript", "React", "GitHub Actions"],
     repositoryUrl: "https://github.com/MortyYJT/personal-website-guyuy",
@@ -48,7 +48,7 @@ export const projects: readonly Project[] = [
     year: "2026",
     evidence: [
       "https://github.com/MortyYJT/personal-website-guyuy/blob/main/src/components/persistent-player.tsx",
-      "https://github.com/MortyYJT/personal-website-guyuy/blob/main/.github/workflows/pages.yml",
+      "https://github.com/MortyYJT/personal-website-guyuy/blob/main/.github/workflows/deploy.yml",
     ],
   },
   {

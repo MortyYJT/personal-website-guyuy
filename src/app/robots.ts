@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteOrigin } from "../lib/site";
 
-// Required for the static export used by GitHub Pages.
+// Required for the static export deployed to the server.
 export const dynamic = "force-static";
 export default function robots(): MetadataRoute.Robots {
   return {
