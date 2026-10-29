@@ -4,7 +4,7 @@
 
 ## 当前状态（main，已上线）
 
-- 线上主站：https://mortyyjt.site/ （自己的服务器，main 每次更新后由 `.github/workflows/deploy.yml` 自动部署）；Vercel 是镜像。
+- 线上主站：https://mortyyjt.site/ （自己的服务器，main 每次更新后由 `.github/workflows/deploy.yml` 自动部署）；同一流程也更新镜像 https://mortyyjt.github.io/ ；Vercel 也是镜像。
 - 首页：毛玻璃卡片、hello 开屏、问候卡（只有问候和名字）、图片卡（绝区零插画，点开是 `/pictures` 画廊）、时钟、日历、最新项目、仿参考站外壳的播放器、GitHub 和「复制邮箱」按钮（点击复制并在底部提示）。
 - 小档案：个人简介（讲性格，活泼语气）、经历（墨大 2026.07–2028.06、莫纳什 2025.07–2026.06，计算机，一行一条，新的在上）、项目、技术栈（按仓库实际依赖，突出 Agent）、6 个游戏带官方图标、5 首歌链到网易云、联系。
 - 项目页 6 个：OfferPilot（留学申请 agent，面向全球）、墨大课业 Agent（进行中）、这个网站、SageSense（用户总负责、写了几乎全部代码）、Garbage Collection Inc（控制台引擎由课程提供）、Bullet Bloom。
@@ -19,7 +19,6 @@
 
 ## 待办（都不急，用户有需要再做）
 
-- `MortyYJT.github.io` 仓库还在发布最后一版旧网站：删除仓库，还是改成跳转到 `mortyyjt.site`，由用户决定。
 - LeapAshore 仓库的 GitHub 简介（About）还写「Group of Eight」，由用户决定是否改。
 - Steam 三款游戏图标只有 32px，高分屏略糊；以后有更清晰的官方来源可以替换。
 
