@@ -3,9 +3,9 @@
 本次：Hello 首帧修复、用户提供的站内 MP3、恢复爱心与 SQLite 点赞服务、停用镜像发布。详见 `note/2026-11-16-intro-music-likes.md` 与 `deploy/README.md`。
 
 - 分支 `codex/intro-music-likes`；网站继续静态部署，新增独立 Node.js 24 容器服务和持久卷。
-- 先合并 LeapAshore 的 `codex/site-likes-routing` 路由 PR 并应用 Caddy，再合并网站 PR。遵守用户合并约定，不擅自合并 main。
+- 用户已明确授权代理合并，并要求删除“用户合并 main”规则；已从工程规范移除。先合并 LeapAshore 路由 PR 并应用 Caddy，再合并网站 PR。
 - 验证：lint/types/25 tests、两种构建、Chrome 9 组、服务器 Docker 构建/健康检查、Caddy 配置校验通过。
-- 已准备服务器固定部署命令及单独 Actions Secret。正式 API 尚未对公网转发；正式计数 0。
+- 已准备服务器固定部署命令及单独 Actions Secret。正式 API 待应用 Caddy 后对公网转发；测试未写入正式点赞数。
 - 主站新版本通过后关闭 Pages、撤销镜像发布凭据、删除正确的 Vercel 项目。Vercel 连接需要重新认证；尚未完成镜像下线。
 - 大陆出口与真机 Safari 未测；同一浏览器身份只计一次，清除 Cookie/过期/换设备后视为新访客，无登录。
 

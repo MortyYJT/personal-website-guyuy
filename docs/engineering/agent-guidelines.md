@@ -30,7 +30,7 @@ This document expands the root `AGENTS.md`. Read the relevant sections before th
 
 ## Git and changes
 
-- Inspect status, branch, HEAD, and remotes before changing repository state. Preserve unrelated user work. Use `codex/` branches and reviewable pull requests; the user merges into `main`. A new-repository bootstrap on `main` requires explicit authorization.
+- Inspect status, branch, HEAD, and remotes before changing repository state. Preserve unrelated user work. Use `codex/` branches and reviewable pull requests. A new-repository bootstrap on `main` requires explicit authorization.
 - Use `type(scope): imperative summary`, followed by a blank line and a non-empty English `- ` bullet body. Use `feat(ui)` or `fix(ui)` for UI changes; reserve `style` for formatting only. Run `git diff --cached --check` before committing.
 - Treat committing, pushing, production release, merging, and irreversible deletion as separate actions. Proceed when the session clearly authorizes the action; otherwise prepare a concrete reviewable result first and explain the specific missing authorization. Do not request the same permission again.
 
