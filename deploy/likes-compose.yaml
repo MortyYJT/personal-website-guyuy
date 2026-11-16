@@ -1,0 +1,29 @@
+name: mortyyjt-likes
+services:
+  likes:
+    image: mortyyjt-likes:${LIKES_VERSION:?set an exact commit SHA}
+    restart: unless-stopped
+    environment:
+      SITE_ORIGIN: https://mortyyjt.site
+    volumes:
+      - likes-data:/data
+    networks:
+      front:
+        aliases: [mortyyjt-likes]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 128m
+    cpus: 0.5
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: "2"
+volumes:
+  likes-data:
+networks:
+  front:
+    external: true
+    name: deploy_default

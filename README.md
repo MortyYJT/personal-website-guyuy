@@ -38,18 +38,17 @@ The toolchain pins TypeScript 6 because the current ESLint parser does not suppo
 
 Edit `src/content/` (`profile.ts`, `projects.ts`, `friends.ts`, `nav.ts`, `site.ts`, `ui.ts`). Every visible project requires bilingual copy, a public GitHub repository and implementation evidence. Use only **MortyYJT / 谷鱼Y** as the owner's identity.
 
-The music player (Toby Fox's official Bandcamp embed) lives in the root layout so it keeps playing across pages.
+The same-origin audio player lives in the root layout so it keeps playing across pages.
+The homepage heart uses a same-origin likes service; one anonymous browser cookie records one like.
 
 ## Deployment
 
-Pushes to `main` build a static export (`STATIC_EXPORT=1`) and rsync it to `/srv/mortyyjt.site` on the owner's server (`.github/workflows/deploy.yml`). The repository secret `SITE_DEPLOY_KEY` is an SSH key that the server confines with rrsync to that directory; it cannot open a shell. The Caddy that serves the directory also fronts LeapAshore, so its site block lives in `MortyYJT/LeapAshore` (`deploy/Caddyfile`). Old hashed assets are kept on each deploy so visitors with a cached page still load its styles. The same workflow also force-pushes the export to `MortyYJT/MortyYJT.github.io` (secret `PAGES_DEPLOY_KEY`), kept as a mirror at https://mortyyjt.github.io/; canonical URLs point at mortyyjt.site. Vercel builds the same code as another mirror.
+Pushes to `main` build a static export (`STATIC_EXPORT=1`) and rsync it to `/srv/mortyyjt.site` on the owner's server (`.github/workflows/deploy.yml`). Before uploading the export, the workflow builds and deploys the independent Node.js likes service through a dedicated forced-command SSH key (`LIKES_DEPLOY_KEY`). The static upload key (`SITE_DEPLOY_KEY`) remains confined to its original rsync directory. See [deploy/README.md](deploy/README.md) for bootstrap, persistence, backup and rollback instructions.
+
+The Caddy that also fronts LeapAshore serves the static directory and proxies `/api/likes` to the service; its configuration lives in `MortyYJT/LeapAshore` (`deploy/Caddyfile`). Old hashed assets are retained on each deploy for cached pages. SQLite lives in a separate persistent Docker volume and is never included in the static export. There is no login requirement. The former Pages and Vercel mirrors are retired; `mortyyjt.site` is the only publication target.
 
 Chinese and the light theme are the defaults. Explicit choices persist under `guyuy:preferences:v1` in local browser storage across routes and reloads. If storage is denied, controls continue working in memory; a fresh load uses the defaults. Reduced motion skips the opening animation, card entrances and theme transition.
 
-## Deployment
-
-The site itself needs no database, authentication or API keys. On Vercel, select **Next.js**, repository root, Node.js 24, and the default build settings.
-
-Repository: [MortyYJT/personal-website-guyuy](https://github.com/MortyYJT/personal-website-guyuy). Production: [mortyyjt.site](https://mortyyjt.site/); mirror: [personal-website-guyuy.vercel.app](https://personal-website-guyuy.vercel.app). Canonical, Open Graph, robots and sitemap URLs use the origin in `src/lib/site.ts`; update it if the domain changes. CI runs lint, types, tests, the default build and the static export on every push and pull request.
+Repository: [MortyYJT/personal-website-guyuy](https://github.com/MortyYJT/personal-website-guyuy). Production: [mortyyjt.site](https://mortyyjt.site/). Canonical, Open Graph, robots and sitemap URLs use the origin in `src/lib/site.ts`. CI runs lint, types, unit/API tests, the default build, the static export and the likes container build on every push and pull request.
 
 Local acceptance and remaining remote checks are recorded in `note/2026-10-08-implementation.md`. Agent instructions are indexed in `AGENTS.md`; detailed guidance is in `docs/engineering/agent-guidelines.md`.

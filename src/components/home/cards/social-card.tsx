@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { LikeButton } from "../like-button";
 import { profile } from "../../../content/profile";
 import { ui } from "../../../content/ui";
 import { usePreferences } from "../../preferences-provider";
@@ -45,6 +46,7 @@ export function SocialCard() {
           <path d="m4 7 8 6 8-6" />
         </svg>
       </button>
+      <LikeButton />
       <p className={toast ? "toast is-visible" : "toast"} role="status" aria-live="polite">
         {toast}
       </p>

@@ -1,17 +1,3 @@
-type SessionStorage = Pick<Storage, "getItem" | "setItem">;
-const introKey = "guyuy:intro:v1";
-
-export function createIntroGate(storage: SessionStorage | undefined) {
-  let seen = false;
-  return (reducedMotion: boolean): boolean => {
-    if (reducedMotion || seen) return false;
-    seen = true;
-    try {
-      if (storage?.getItem(introKey) === "seen") return false;
-      storage?.setItem(introKey, "seen");
-    } catch {
-      // The in-memory guard also works when session storage is denied.
-    }
-    return true;
-  };
-}
+// Runs in <head> before the browser can paint the server-rendered page.
+// The timeout fails open even if hydration never starts.
+export const introBootstrap = `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let seen=false;try{seen=sessionStorage.getItem('guyuy:intro:v1')==='seen'}catch{}if(!seen){document.documentElement.dataset.intro='pending';setTimeout(()=>{delete document.documentElement.dataset.intro},8000)}}}catch{delete document.documentElement.dataset.intro}`;

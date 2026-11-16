@@ -13,10 +13,11 @@ project is distributed under the MIT License, Copyright (c) 2025 YYsuni.
 - Averia Gruesa Libre, SIL Open Font License 1.1, served through `next/font` (self-hosted at build
   time).
 
-## Embedded services
+## Music
 
-- The music card embeds Toby Fox's official Bandcamp player for "Undertale" from the UNDERTALE
-  Soundtrack (https://tobyfox.bandcamp.com/album/undertale-soundtrack). No audio is hosted here.
+- `public/music/undertale.mp3` is "Undertale" by Toby Fox, from the UNDERTALE Soundtrack
+  (https://tobyfox.bandcamp.com/album/undertale-soundtrack). The audio was supplied by the owner
+  for same-origin playback; file tags were removed on import. Copyright remains with its rights holder.
 - Song titles on the profile page link to NetEase Cloud Music song pages; nothing is embedded.
 
 ## Game icons

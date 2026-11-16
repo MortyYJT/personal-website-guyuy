@@ -1,0 +1,29 @@
+# 开屏、站内音乐与点赞（2026-11-16）
+
+## 决定与实现
+
+- 用户要求修复主页先于 Hello 出现、改为服务器本地音乐、恢复点赞，并明确只保留 mortyyjt.site，删除 Pages/Vercel 镜像。确认按同一浏览器去重，无登录、不按 IP。
+- 开屏改为 head 脚本在首帧前决策；遮罩随 HTML 一起返回。保持 sessionStorage 会话去重、跳过、Escape、reduced motion；8 秒未完成 hydration 自动放行。删除已无用途的旧 gate 函数与其测试。
+- 导入用户提供的 Toby Fox《Undertale》MP3，移除 ID3 标签；音频同域 `/music/undertale.mp3`，原生 audio 事件驱动进度，保留根布局播放器与跨路由播放。没有自动播放。
+- 从 a3faa5eed1 恢复爱心、动画和响应校验；不恢复旧 IP/一天 TTL 的 Cloudflare KV 后端，也不把旧 localStorage 标记当作真实点赞。
+- 独立 Node.js 24/TypeScript HTTP 服务 + SQLite 唯一访客记录，签名 HttpOnly/Secure/SameSite Cookie，GET 初始化身份、POST 才计数，重复/并发/重试不增第二次；写入失败显示可重试错误。Cookie 被清除、过期或换浏览器后视为新访客。
+- SQLite 和签名密钥在独立 Docker 持久卷；网页 rsync 不触及数据。容器无公开端口，加入现有 Caddy 网络，限制能力、内存和进程数。
+- 部署改为先部署/检查点赞服务，再上传静态网页；取消镜像推送。新增单独的 LIKES_DEPLOY_KEY，通过服务器 root-owned 固定命令部署，原 SITE_DEPLOY_KEY 权限不变。
+- 构建发现 Next.js 16.4.0 安全告警，同版本线升级 Next.js/eslint-config-next 到 16.4.6，后续构建无该告警。未做无关的全量依赖升级。
+
+## 已验证
+
+- lint、typecheck、25 个单元/API 测试、默认生产构建、静态导出均通过。
+- API 测试：同一签名身份 25 个并发 POST 只计一次；另一身份累计；重新连接数据库/重启服务语义保持；伪造/缺失 Cookie、异站 Origin、异常方法和路径均正确拒绝。
+- Chrome 真实浏览器 9 组通过，无 pageerror：慢 JS 首帧只见遮罩；刷新/新标签页点赞状态；不同浏览器身份累计；真实音频播放暂停和跨页不断；语言/主题持久化与键盘播放；375px 无横向溢出；reduced motion；JS 加载失败 8 秒放行；Cookie 不可用提示；音频加载失败后重试恢复。
+- 本地静态音频 Range 请求 206、audio/mpeg；实际媒体时长大于 300 秒，播放位置随时间增长，未请求第三方音乐服务。
+- 在服务器成功构建 Linux Docker 镜像，点赞服务健康，Caddy 容器内可以访问服务健康检查和初始计数 0。
+- 用线上 Caddy 二进制校验待合并的路由配置成功；尚未将它应用到公网。
+- 新部署公钥已安装，Actions Secret 已设置；专用钥匙尝试执行 id 被固定命令以退出码 64 拒绝。未修改原网页上传钥匙。
+
+## 发布顺序与边界
+
+- 保持仓库约定：由用户合并 PR。先合并 LeapAshore 的 Caddy 路由 PR，再应用该配置；随后合并网站 PR，由 main Actions 部署与外部验证。
+- 公网主站通过后，再关闭 MortyYJT.github.io 的 Pages，撤销专用镜像发布凭据，删除核实归属后的 Vercel 镜像项目；保留源码及历史仓库。
+- Vercel 插件连接需要重新认证；尚未删除其项目。未宣称镜像已下线或新网页已上线。
+- 无大陆网络出口、无真机 Safari；大陆实际可播放性及真机行为尚未验证。浏览器测试使用本地同域代理与独立测试数据库，没有污染正式点赞数。

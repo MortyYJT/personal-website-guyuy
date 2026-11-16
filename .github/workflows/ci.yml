@@ -31,3 +31,5 @@ jobs:
         env:
           STATIC_EXPORT: "1"
           NEXT_TELEMETRY_DISABLED: 1
+      - name: Build likes container
+        run: docker build -f services/likes/Dockerfile -t mortyyjt-likes:ci .
