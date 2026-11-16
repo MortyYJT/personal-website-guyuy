@@ -9,10 +9,10 @@
 ## 本次变更与发布
 
 - 网站 PR #17：Hello 首帧修复、用户提供的站内 MP3、原生 audio、恢复爱心与独立 SQLite 点赞服务、仅向服务器发布；Next.js 安全补丁 16.4.6。
-- LeapAshore PR #87：Caddy 同域 `/api/*` 转发，已合并；服务器路由配置待应用。
+- LeapAshore PR #87：Caddy 同域 `/api/*` 转发，已合并；服务器路由已通过 stdin 热加载；公网 API 已返回 JSON。
 - 点赞容器、独立持久卷、root-owned 固定部署命令、LIKES_DEPLOY_KEY 已准备；正式计数 0。用专用钥匙拒绝 id、成功部署并通过健康检查，临时私钥已删除。
 - 验证：lint/types/25 tests、默认与静态构建、Chrome 9 组、服务器 Docker 构建/健康检查、Caddy 配置校验通过。测试未写入正式点赞记录。
-- 下一步：应用已合并的 Caddy 配置并验证公网 API，然后合并网站 PR、等待 main Actions 部署，验证首屏、音乐与点赞，最后更新本交接的发布状态。
+- 下一步：合并网站 PR、等待 main Actions 部署，验证首屏、音乐与点赞，最后更新本交接的发布状态。
 - 本机网络到 GitHub/服务器阶段性中断；不要把请求尝试当作成功。Vercel 不在后续工作范围内。
 - 大陆出口与真机 Safari 未测。同一浏览器 Cookie 身份只计一次；清除/过期/换浏览器或设备后视为新访客，无登录。
 

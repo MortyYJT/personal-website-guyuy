@@ -39,6 +39,17 @@ Cloudflare Worker was not restored; the counter starts at zero.
    Keep root, encoding and asset cache headers at site level, so the existing 404 handler
    still sees the correct document root. Preserve the www redirect and LeapAshore configuration. Validate the
    Caddy configuration and reload it only after the first service container is healthy.
+   The Caddyfile is a single-file bind mount: an earlier atomic replacement may leave the running
+   container reading the old inode. Validate and reload the actual host file over stdin, rather
+   than assuming the mounted copy is current:
+
+   ```sh
+   docker exec -i deploy-caddy-1 caddy adapt --adapter caddyfile --config /dev/stdin --validate < /home/ubuntu/leapashore/deploy/Caddyfile > /dev/null
+   docker exec -i deploy-caddy-1 caddy reload --adapter caddyfile --config /dev/stdin < /home/ubuntu/leapashore/deploy/Caddyfile
+   ```
+
+   Keep a host-side backup for rollback and reload that file over stdin if needed. Verify the
+   public `/api/likes` returns JSON, not the static HTML 404 page.
 
 ## Release and rollback
 
