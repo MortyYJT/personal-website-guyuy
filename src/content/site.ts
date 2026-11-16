@@ -2,15 +2,12 @@ import type { LocalizedText } from "./types";
 
 export const site: {
   avatar: { src: string; alt: LocalizedText };
-  /** One favourite track, played through Toby Fox's official Bandcamp embed. */
+  /** One favourite track, served from the site itself. */
   song: {
     title: string;
     artist: string;
-    album: string;
-    track: string;
+    src: string;
     page: string;
-    /** Track length from Bandcamp's album data; drives the facade progress bar. */
-    durationSeconds: number;
   };
   /** Optional page backdrop; keep credit text for third-party artwork. */
   backgroundImage: { src: string; credit: string } | null;
@@ -22,10 +19,8 @@ export const site: {
   song: {
     title: "Undertale",
     artist: "Toby Fox",
-    album: "2955245981",
-    track: "1570961482",
+    src: "/music/undertale.mp3",
     page: "https://tobyfox.bandcamp.com/album/undertale-soundtrack",
-    durationSeconds: 381.536,
   },
   backgroundImage: null,
 };

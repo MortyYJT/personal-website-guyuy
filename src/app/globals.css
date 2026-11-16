@@ -848,26 +848,18 @@ p {
   background: var(--accent);
   transition: width 0.5s linear;
 }
-/* Bandcamp's own 40px play button, clipped and laid under the visible face. */
+/* The visible button controls the same-origin audio element directly. */
 .music-button {
   position: relative;
   width: 42px;
   height: 42px;
   flex: none;
   border-radius: 50%;
-  overflow: hidden;
   background: var(--canvas);
   box-shadow: 0 2px 10px #0000001a;
 }
-.music-embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 400px;
-  height: 42px;
-  border: 0;
-  opacity: 0.011;
-}
+.music-status { font-size: 11px; color: var(--muted); }
+.music-status:empty { display: none; }
 .music-button-face {
   position: absolute;
   inset: 0;
@@ -1259,10 +1251,23 @@ a.gallery-card:hover {
   position: fixed;
   inset: 0;
   z-index: 100;
-  display: grid;
+  display: none;
   place-items: center;
   background: var(--canvas);
+}
+:root[data-intro] .hello-intro {
+  display: grid;
+}
+:root[data-intro="playing"] .hello-intro {
   animation: hello-curtain 2.9s ease forwards;
+}
+:root[data-intro="pending"] .hello-word text {
+  animation: none;
+  fill-opacity: 1;
+  stroke-dashoffset: 0;
+}
+:root[data-intro] .shell {
+  visibility: hidden;
 }
 .hello-word {
   width: min(560px, 82vw);
@@ -1324,8 +1329,22 @@ a.gallery-card:hover {
     display: none;
   }
 }
+:root[data-intro] .page-enter,
 :root[data-intro] .card,
 :root[data-intro] .card-social,
 :root[data-intro] .persistent-player {
   animation-play-state: paused;
 }
+
+/* Restored heart tile, alongside GitHub and email. */
+.like-control { position: relative; }
+.like-button { background: var(--glass); color: #c76d7a; border: 1px solid var(--glass-border); width: auto; min-width: 46px; padding: 0 10px; display: flex; gap: 6px; }
+.like-button svg { fill: none; stroke: currentColor; stroke-width: 1.8; }
+.like-button.is-liked svg { fill: currentColor; }
+.like-button:disabled { cursor: default; }
+.like-button:disabled:hover { transform: none; }
+.like-count { font-size: 13px; font-variant-numeric: tabular-nums; }
+.like-status { position: absolute; top: calc(100% + 6px); right: 0; width: max-content; max-width: min(250px, 80vw); color: var(--muted); font-size: 12px; }
+.like-button.is-popping svg { animation: heart-pop 400ms ease; }
+@keyframes heart-pop { 50% { transform: scale(1.3); } }
+@media (prefers-reduced-motion: reduce) { .like-button.is-popping svg { animation: none; } }

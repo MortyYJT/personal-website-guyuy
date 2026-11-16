@@ -1,3 +1,5 @@
+> Historical snapshot: this design/plan records an earlier stage, not current deployment. Production is served by the owner's server at mortyyjt.site. Follow the repository README and deploy/README.md; old platform references do not prove an active deployment.
+
 # Personal Website Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended by the workflow) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.

@@ -1,0 +1,9 @@
+*
+!services/
+services/*
+!services/likes/
+services/likes/*
+!services/likes/Dockerfile
+!services/likes/main.ts
+!services/likes/server.ts
+!services/likes/store.ts

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Averia_Gruesa_Libre, Dancing_Script } from "next/font/google";
 import "./globals.css";
+import { introBootstrap } from "../lib/intro";
 import { HelloIntro } from "../components/hello-intro";
 import { PersistentPlayer } from "../components/persistent-player";
 import { PreferencesProvider } from "../components/preferences-provider";
@@ -45,6 +46,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introBootstrap }} />
       </head>
       <body>
         <PreferencesProvider>

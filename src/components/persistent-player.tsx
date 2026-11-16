@@ -1,45 +1,29 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import { site } from "../content/site";
 import { ui } from "../content/ui";
-import { bandcampEmbedUrl, clockFraction, pauseClock, startClock, type FacadeClock } from "../lib/music";
+import { playbackFraction } from "../lib/music";
 import { usePreferences } from "./preferences-provider";
 
-// The embed sits invisibly under the round button, so its colours never show.
-const colours = { background: "ffffff", link: "4a9b78" };
-const noop = () => () => {};
-const stopped: FacadeClock = { elapsed: 0, startedAt: null };
-
-// Frozen on first client read so re-renders never reload (and stop) the player.
-let frozenSrc: string | null = null;
-function clientSrc() {
-  frozenSrc ??= bandcampEmbedUrl(site.song, colours);
-  return frozenSrc;
-}
-
-/**
- * A facade in the reference's style (note, title, progress, round button) over
- * Toby Fox's official Bandcamp embed. The embed is clipped to its own play
- * button and laid under ours, so a click is a real click on Bandcamp's button.
- * The cross-origin frame reports nothing back; the page only learns that the
- * frame took focus, and times the known track length from there.
- *
- * Lives in the root layout so client-side navigation never unmounts the
- * iframe. On the home page it sits over the music card's `[data-player-slot]`;
- * elsewhere it docks in the corner while a track is under way.
- */
+/** One real audio element survives client-side navigation in the root layout. */
 export function PersistentPlayer() {
   const { locale } = usePreferences();
+  const text = ui[locale];
   const pathname = usePathname();
-  const src = useSyncExternalStore(noop, clientSrc, () => null);
-  const frame = useRef<HTMLIFrameElement>(null);
-  const [slot, setSlot] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
-  const [clock, setClock] = useState<FacadeClock>(stopped);
+  const audio = useRef<HTMLAudioElement>(null);
+  const playAttempt = useRef(0);
+  const starting = useRef(false);
+  const [slot, setSlot] = useState<{
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  } | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [fraction, setFraction] = useState(0);
-  const durationMs = site.song.durationSeconds * 1000;
-  const playing = clock.startedAt !== null;
-
   useEffect(() => {
     let raf = 0;
     const measure = () => {
@@ -70,70 +54,114 @@ export function PersistentPlayer() {
     };
   }, [pathname]);
 
-  // A click inside the frame moves focus into it and blurs this window.
-  useEffect(() => {
-    const onBlur = () => {
-      window.setTimeout(() => {
-        if (document.activeElement !== frame.current) return;
-        const now = Date.now();
-        setClock((c) => (c.startedAt === null ? startClock(c, now) : pauseClock(c, now)));
-        // Hand focus back so the next click blurs the window again.
-        frame.current?.blur();
-      }, 0);
-    };
-    window.addEventListener("blur", onBlur);
-    return () => window.removeEventListener("blur", onBlur);
-  }, []);
-
-  useEffect(() => {
-    if (!playing) return;
-    const tick = () => {
-      const next = clockFraction(clock, Date.now(), durationMs);
-      setFraction(next);
-      if (next >= 1) {
-        setClock(stopped);
-        setFraction(0);
+  async function toggle() {
+    const player = audio.current;
+    if (!player) return;
+    const attempt = ++playAttempt.current;
+    if (!player.paused || starting.current) {
+      starting.current = false;
+      player.pause();
+      setLoading(false);
+      return;
+    }
+    starting.current = true;
+    setError(false);
+    setLoading(true);
+    if (player.error) player.load();
+    try {
+      await player.play();
+    } catch (cause) {
+      if (
+        attempt === playAttempt.current &&
+        !(cause instanceof DOMException && cause.name === "AbortError")
+      ) {
+        setError(true);
       }
-    };
-    tick();
-    const id = window.setInterval(tick, 500);
-    return () => window.clearInterval(id);
-  }, [clock, playing, durationMs]);
+    } finally {
+      if (attempt === playAttempt.current) {
+        starting.current = false;
+        setLoading(false);
+      }
+    }
+  }
 
-  if (!src) return null;
-  const { song } = site;
   const docked = !slot;
-  const idle = !playing && clock.elapsed === 0;
-  const classes = ["persistent-player", docked && "is-docked", docked && idle && "is-hidden"]
+  const idle = !playing && !loading && fraction === 0 && !error;
+  const classes = [
+    "persistent-player",
+    docked && "is-docked",
+    docked && idle && "is-hidden",
+  ]
     .filter(Boolean)
     .join(" ");
+  const label = error
+    ? text.musicRetry
+    : playing || loading
+      ? text.musicPause
+      : text.musicPlay;
   return (
-    <div
-      className={classes}
-      style={slot ? { top: slot.top, left: slot.left, width: slot.width, height: slot.height } : undefined}
-    >
+    <div className={classes} style={slot ?? undefined}>
+      <audio
+        ref={audio}
+        src={site.song.src}
+        preload="none"
+        onPlaying={() => {
+          setPlaying(true);
+          setLoading(false);
+        }}
+        onPause={() => {
+          setPlaying(false);
+          setLoading(false);
+        }}
+        onWaiting={() => setLoading(true)}
+        onTimeUpdate={(event) =>
+          setFraction(
+            playbackFraction(
+              event.currentTarget.currentTime,
+              event.currentTarget.duration,
+            ),
+          )
+        }
+        onEnded={() => {
+          setPlaying(false);
+          setFraction(0);
+        }}
+        onError={() => {
+          setError(true);
+          setLoading(false);
+          setPlaying(false);
+        }}
+      />
       <svg className="music-note" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M9 18V5l11-2v13" />
         <circle cx="6" cy="18" r="3" />
         <circle cx="17" cy="16" r="3" />
       </svg>
       <div className="music-meta">
-        <a className="music-title" href={song.page} target="_blank" rel="noopener noreferrer">
-          {song.title}
+        <a
+          className="music-title"
+          href={site.song.page}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {site.song.title}
         </a>
         <div className="music-progress" aria-hidden="true">
           <span style={{ width: `${fraction * 100}%` }} />
         </div>
+        <span className="music-status" role="status">
+          {error ? text.musicFailed : loading ? text.musicLoading : ""}
+        </span>
       </div>
-      <div className="music-button">
-        <iframe
-          ref={frame}
-          className="music-embed"
-          src={src}
-          title={`${ui[locale].songFrame}: ${song.title} · ${song.artist}`}
-        />
+      <button
+        type="button"
+        className="music-button"
+        onClick={toggle}
+        aria-label={label}
+        aria-pressed={playing}
+      >
         <span className="music-button-face" aria-hidden="true">
-          {playing ? (
+          {playing || loading ? (
             <svg viewBox="0 0 24 24">
               <rect x="6" y="5" width="4" height="14" rx="1" />
               <rect x="14" y="5" width="4" height="14" rx="1" />
@@ -144,7 +172,7 @@ export function PersistentPlayer() {
             </svg>
           )}
         </span>
-      </div>
+      </button>
     </div>
   );
 }

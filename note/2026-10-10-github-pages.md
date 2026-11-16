@@ -1,3 +1,5 @@
+> 历史记录：本文保留当时的设计与操作记录，不代表当前部署。当前仅部署到自己的服务器 mortyyjt.site；请以仓库 README 和 deploy/README.md 为准。旧平台说明不能作为现有部署的证据。
+
 # 部署到 GitHub Pages
 
 - 问题：GitHub 主页 README 的 Portfolio 徽章和个人资料里的 Website 字段都还指向旧站 `guyuy-portfolio.vercel.app`（旧仓库 `GuYuY-portfolio`），所以看起来像「新站没改」。

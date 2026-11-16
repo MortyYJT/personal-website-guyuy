@@ -20,5 +20,5 @@ The linked document is not loaded automatically. Read its relevant sections befo
 | Importing content, assets, or profile data | Identity and privacy |
 | Planning, implementing, or verifying changes | Scope and implementation; Verification and deployment |
 | Changing Git state, committing, pushing, or opening a PR | Git and changes; Identity and privacy |
-| Changing Vercel state or releasing | Verification and deployment; Git and changes |
+| Changing server deployment state or releasing | Verification and deployment; Git and changes |
 | Writing docs or reporting milestones | Communication and documentation |
