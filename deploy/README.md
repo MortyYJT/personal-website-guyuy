@@ -43,17 +43,16 @@ Cloudflare Worker was not restored; the counter starts at zero.
 ## Release and rollback
 
 The main-branch workflow builds the likes Docker image, streams it to the restricted command,
-waits for the healthcheck and checks the public endpoint, then rsyncs the static export. It does
-not publish Pages or Vercel. The first release needs one bootstrap image before the Caddy reload.
+waits for the healthcheck and checks the public endpoint, then rsyncs the static export. It publishes only to the owner's server. The first release needs one bootstrap image before the Caddy reload.
 GitHub-hosted runners build Linux images. For a manual Apple Silicon build, use `--platform linux/amd64`.
 The deployment command automatically restores the previous image version if the new one fails its
 healthcheck. For a deliberate rollback, stream the previous built image using its commit SHA;
 keep the same volume. Back up SQLite using its online backup API, not a live copy of just the DB
 file (WAL may contain recent likes). Future schema migrations must remain backward-compatible.
 
-Disable Pages on `MortyYJT/MortyYJT.github.io` and revoke `PAGES_DEPLOY_KEY` only after the new main
-site passes acceptance. Remove the Vercel project linked to this source repository after checking
-its account/project identity; do not touch other Vercel projects. Keep both GitHub repositories.
+The owner handles any cleanup of the former GitHub Pages site and its dedicated publishing
+credentials. The current workflow never uses `PAGES_DEPLOY_KEY`. Do not infer or create additional
+deployment projects from old notes; the only supported production target is this server.
 
 ## Local checks
 

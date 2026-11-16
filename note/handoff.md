@@ -1,54 +1,19 @@
 # 当前工作交接（2026-11-16）
 
-本次：Hello 首帧修复、用户提供的站内 MP3、恢复爱心与 SQLite 点赞服务、停用镜像发布。详见 `note/2026-11-16-intro-music-likes.md` 与 `deploy/README.md`。
+## 当前事实
 
-- 分支 `codex/intro-music-likes`；网站继续静态部署，新增独立 Node.js 24 容器服务和持久卷。
-- 用户已明确授权代理合并，并要求删除“用户合并 main”规则；已从工程规范移除。先合并 LeapAshore 路由 PR 并应用 Caddy，再合并网站 PR。
-- 验证：lint/types/25 tests、两种构建、Chrome 9 组、服务器 Docker 构建/健康检查、Caddy 配置校验通过。
-- 已准备服务器固定部署命令及单独 Actions Secret。正式 API 待应用 Caddy 后对公网转发；测试未写入正式点赞数。
-- 主站新版本通过后关闭 Pages、撤销镜像发布凭据、删除正确的 Vercel 项目。Vercel 连接需要重新认证；尚未完成镜像下线。
-- 大陆出口与真机 Safari 未测；同一浏览器身份只计一次，清除 Cookie/过期/换设备后视为新访客，无登录。
+- 唯一部署目标是用户自己的服务器，公网地址 `https://mortyyjt.site/`。GitHub 保存源码并运行 Actions；不把旧文档里的平台描述当作现有部署的证据。
+- 用户明确说明没有 Vercel 部署；旧 README 的相关说明已纠正。不要再寻找或删除 Vercel 项目。用户自行处理旧镜像删除；代理已移除镜像自动发布步骤。
+- 用户授权代理合并，并要求删除“用户合并 main”规则；已从工程规范移除。继续使用 codex 分支、PR 和验证，合并不再要求用户亲自操作。
 
----
+## 本次变更与发布
 
-以下为前一阶段历史交接：
+- 网站 PR #17：Hello 首帧修复、用户提供的站内 MP3、原生 audio、恢复爱心与独立 SQLite 点赞服务、仅向服务器发布；Next.js 安全补丁 16.4.6。
+- LeapAshore PR #87：Caddy 同域 `/api/*` 转发，已合并；服务器路由配置待应用。
+- 点赞容器、独立持久卷、root-owned 固定部署命令、LIKES_DEPLOY_KEY 已准备；正式计数 0。用专用钥匙拒绝 id、成功部署并通过健康检查，临时私钥已删除。
+- 验证：lint/types/25 tests、默认与静态构建、Chrome 9 组、服务器 Docker 构建/健康检查、Caddy 配置校验通过。测试未写入正式点赞记录。
+- 下一步：应用已合并的 Caddy 配置并验证公网 API，然后合并网站 PR、等待 main Actions 部署，验证首屏、音乐与点赞，最后更新本交接的发布状态。
+- 本机网络到 GitHub/服务器阶段性中断；不要把请求尝试当作成功。Vercel 不在后续工作范围内。
+- 大陆出口与真机 Safari 未测。同一浏览器 Cookie 身份只计一次；清除/过期/换浏览器或设备后视为新访客，无登录。
 
-# 交接（2026-10-29 更新）
-
-新会话先读这个文件，再对照 `git status` / `git log` 核实。用户说本阶段已完成，项目暂停；下次有新需求再继续。
-
-## 当前状态（main，已上线）
-
-- 线上主站：https://mortyyjt.site/ （自己的服务器，main 每次更新后由 `.github/workflows/deploy.yml` 自动部署）；同一流程也更新镜像 https://mortyyjt.github.io/ ；Vercel 也是镜像。
-- 首页：毛玻璃卡片、hello 开屏、问候卡（只有问候和名字）、图片卡（绝区零插画，点开是 `/pictures` 画廊）、时钟、日历、最新项目、仿参考站外壳的播放器、GitHub 和「复制邮箱」按钮（点击复制并在底部提示）。
-- 小档案：个人简介（讲性格，活泼语气）、经历（墨大 2026.07–2028.06、莫纳什 2025.07–2026.06，计算机，一行一条，新的在上）、项目、技术栈（按仓库实际依赖，突出 Agent）、6 个游戏带官方图标、5 首歌链到网易云、联系。
-- 项目页 6 个：OfferPilot（留学申请 agent，面向全球）、墨大课业 Agent（进行中）、这个网站、SageSense（用户总负责、写了几乎全部代码）、Garbage Collection Inc（控制台引擎由课程提供）、Bullet Bloom。
-- 友链 3 个：不想上学、MarkChu、Emulisy。画廊 14 张图（`public/pictures/`，WebP，元数据含 GPS 已去除）。
-- 深色模式：纯黑极简（`#101211`，无光晕、无颗粒）。点赞功能已整个删除。
-
-## 2026-10-29 更新
-
-- PR #13 已合并：OfferPilot 改名 LeapAshore（鱼跃彼岸），墨大课业 Agent 改名 StudyOrbit，项目页按两个仓库当前 README 重写；技术栈加 LangGraph、Vite。
-- **网站搬到自己的服务器**，域名 `mortyyjt.site`，不再用 GitHub Pages。怎么搭的、钥匙权限、上线顺序见 `note/2026-10-29-self-host.md`。PR #14（Pages + CNAME 方案）已关闭。
-- 本机环境变量带 `NODE_ENV=development` 和 `NODE_DEBUG`，`next build` 会报 `/_global-error` 的 useContext 错；构建时用 `env -u NODE_ENV -u NODE_DEBUG`。本机 rsync 是 macOS 的 openrsync，过不了服务器的 rrsync，测试部署要用 Linux 容器里的标准 rsync。
-
-## 待办（都不急，用户有需要再做）
-
-- LeapAshore 仓库的 GitHub 简介（About）还写「Group of Eight」，由用户决定是否改。
-- Steam 三款游戏图标只有 32px，高分屏略糊；以后有更清晰的官方来源可以替换。
-
-## 约定（不要违反）
-
-- 只用 `MortyYJT` / `谷鱼Y` 作为身份；不写真名。邮箱例外：用户主动要求首页放「复制邮箱」按钮（GitHub 账号的 Gmail，拆开存储，页面源码里没有完整地址）；其他私人联系方式仍不放。
-- 文案平实、活泼，不写口号和「AI 味」的句子；不替用户补充没说过的事。
-- 项目描述必须和仓库实际状态一致；不自托管版权音乐（音乐只列出或链接）。新增图片先去掉元数据（GPS）。
-- 这个项目全部由 Claude 自己实现，不派给 Codex 或 dsh。用户说「合并」后由 Claude 合并；不能直接推 main，用 `codex/` 分支加 PR。提交信息：`type(scope): summary`，空行后接英文 `- ` 列表正文。
-- 用户希望尽量在同一个会话窗口完成工作，只有上下文快满时才按 Session hygiene 交接。
-- 主检出（仓库根目录）常常占着某个分支；在 worktree 里用 `git checkout -B <新分支> origin/main`，推送 `git push -u origin HEAD`。zsh 不按空格拆变量，循环里别用 `set -- $p`。
-
-## 运行与验证
-
-- `npm test`（node --test）、`npm run lint`、`npm run typecheck`、`npm run build`；本地预览 `npx next start -p 3123`。
-- 浏览器验证用无头 Chromium 加 npm 缓存里的 playwright-core（`~/.npm/_npx/9833c18b2d85bc59/node_modules/playwright-core`，可执行文件在 `~/Library/Caches/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-*/chrome-headless-shell`）。深色和英文通过 localStorage `guyuy:preferences:v1` = `{"theme":"dark","locale":"en"}` 设置，系统配色不生效。
-- 播放器外壳靠「iframe 获得焦点」判断点击，进度按曲目时长（381.536 秒）计时；测试时用鼠标点 `.music-button` 中心，再读 Bandcamp iframe 里 `audio` 的 paused 和 currentTime 对照。
-- React `<ViewTransition>` 在这个项目里导航时不会触发（原因未查明），页面过渡用 CSS。
+当前部署操作以 `deploy/README.md` 为准，过程证据见 `note/2026-11-16-intro-music-likes.md`。其他带日期的 note 和原始设计/计划保留历史上下文，不代表当前部署。

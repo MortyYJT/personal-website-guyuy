@@ -1,3 +1,5 @@
+> Historical snapshot: this design/plan records an earlier stage, not current deployment. Production is served by the owner's server at mortyyjt.site. Follow the repository README and deploy/README.md; old platform references do not prove an active deployment.
+
 # Personal website rebuild design
 
 Date: 2026-10-08 (Australia/Melbourne)

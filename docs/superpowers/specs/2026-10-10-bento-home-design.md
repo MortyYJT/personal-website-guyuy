@@ -1,3 +1,5 @@
+> Historical snapshot: this design/plan records an earlier stage, not current deployment. Production is served by the owner's server at mortyyjt.site. Follow the repository README and deploy/README.md; old platform references do not prove an active deployment.
+
 # Bento home redesign
 
 Date: 2026-10-10. Status: approved by the owner in chat (design sections 1–4).
