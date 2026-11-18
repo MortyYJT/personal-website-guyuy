@@ -1257,14 +1257,7 @@ a.gallery-card:hover {
 }
 :root[data-intro] .hello-intro {
   display: grid;
-}
-:root[data-intro="playing"] .hello-intro {
   animation: hello-curtain 2.9s ease forwards;
-}
-:root[data-intro="pending"] .hello-word text {
-  animation: none;
-  fill-opacity: 1;
-  stroke-dashoffset: 0;
 }
 :root[data-intro] .shell {
   visibility: hidden;

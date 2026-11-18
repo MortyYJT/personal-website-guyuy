@@ -7,7 +7,7 @@ test("head bootstrap covers the page before hydration and fails open", async () 
     const root: { dataset: { intro?: string } } = { dataset: {} };
     const timers: Array<() => void> = [];
     runInNewContext(introBootstrap, {
-      document: { documentElement: root },
+      document: { documentElement: root, addEventListener: () => {}, removeEventListener: () => {} },
       matchMedia: () => ({ matches: mode === "reduced" }),
       sessionStorage: {
         getItem: () => {
