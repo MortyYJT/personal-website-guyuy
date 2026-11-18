@@ -1,3 +1,3 @@
-// Runs in <head> before the browser can paint the server-rendered page.
-// The timeout fails open even if hydration never starts.
-export const introBootstrap = `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let seen=false;try{seen=sessionStorage.getItem('guyuy:intro:v1')==='seen'}catch{}if(!seen){document.documentElement.dataset.intro='pending';setTimeout(()=>{delete document.documentElement.dataset.intro},8000)}}}catch{delete document.documentElement.dataset.intro}`;
+// Runs before first paint. CSS starts the intro immediately, independently of hydration.
+// A delegated animation listener reveals the page even when client chunks never load.
+export const introBootstrap = `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let seen=false;try{seen=sessionStorage.getItem('guyuy:intro:v1')==='seen'}catch{}if(!seen){document.documentElement.dataset.intro='pending';try{sessionStorage.setItem('guyuy:intro:v1','seen')}catch{}const finish=()=>{delete document.documentElement.dataset.intro;document.removeEventListener('animationend',end)};const end=e=>{if(e.animationName==='hello-curtain'&&e.target.classList.contains('hello-intro'))finish()};document.addEventListener('animationend',end);setTimeout(finish,8000)}}}catch{delete document.documentElement.dataset.intro}`;

@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { ui } from "../content/ui";
 import { usePreferences } from "./preferences-provider";
 
-const introMs = 2900;
-
 function finish() {
   delete document.documentElement.dataset.intro;
 }
@@ -19,19 +17,11 @@ export function HelloIntro() {
       finish();
       return;
     }
-    root.dataset.intro = "playing";
-    try {
-      sessionStorage.setItem("guyuy:intro:v1", "seen");
-    } catch {
-      /* Session-only fallback. */
-    }
-    const timer = window.setTimeout(finish, introMs);
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") finish();
     };
     document.addEventListener("keydown", onKey);
     return () => {
-      window.clearTimeout(timer);
       document.removeEventListener("keydown", onKey);
     };
   }, []);
